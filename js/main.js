@@ -1,8 +1,9 @@
 function buildQueryURL() {
     let search = $('#search-term').val().trim(); 
-    let initialQueryURL = "https://api.seatgeek.com/2/events?q='" + search + "'&client_id:MTUwOTcwMjd8MTU2MzQ2MzA4Ny42OQ";
+    const APIKEY = 'MTUwOTcwMjd8MTU2MzQ2MzA4Ny42OQ';
+    // let initialQueryURL = `https://api.seatgeek.com/2/events?q=${search}&client_id:`;
     // var queryParams = { 'client_id': 'MTUwOTcwMjd8MTU2MzQ2MzA4Ny42OQ' };
-
+    let initialQueryURL = `https://api.seatgeek.com/2/events?q=${search}&client_id=${APIKEY}`;
     // queryParams.q = $('#search-term').val().trim(); 
 
     // let startDate = $('#start-date').val().trim(); 
