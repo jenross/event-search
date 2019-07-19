@@ -53,7 +53,7 @@ $("#run-search").on("click", function(event) {
       url: queryURL,
       method: "GET"
     }).then(function(response) {
-        console.log(response);
+        console.log(response.events[0].title);
     });
   });
   
