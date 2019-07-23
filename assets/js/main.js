@@ -76,9 +76,9 @@ $("#run-search").on("click", function(event) {
             let title = $(`<li class='event-data'><a href='#'>${response.events[i].title}</a></li>`);
             let initialDate = response.events[i].datetime_local;
             let m = moment(initialDate, 'YYYY-MM-DDThh:mm:ss');
-            let convertedDate = $(`<li class='event-data'>${m.format('ll')}</li>`);
-            let location = $(`<li class='event-data'>${response.events[i].venue.display_location}</li>`);
-            let venue = $(`<li class='event-data'>${response.events[i].venue.name}</li>`);
+            // let convertedDate = $(`<li class='event-data'>${m.format('ll')}</li>`);
+            // let location = $(`<li class='event-data'>${response.events[i].venue.display_location}</li>`);
+            // let venue = $(`<li class='event-data'>${response.events[i].venue.name}</li>`);
             let convertedDate = $(`<li class='event-data'> ${m.format('ll')} </li>`);
             let location = $(`<li class='event-data local' id='${response.events[i].venue.postal_code}'>${response.events[i].venue.display_location}</li>`);
             let venue = $(`<li class='event-data'> ${response.events[i].venue.name} </li>`);
@@ -99,6 +99,7 @@ $(document).on('click', '.event-data', function() {
 });
 
 $(document).on('click', '.local', function() {
+  alert('here');
     let search = $(this).attr('id');
     let query = `https://api.openweathermap.org/data/2.5/weather?q=${search}&APPID=3768f4c0e12f6d0baae543410dcc2366`;
     $.ajax({
