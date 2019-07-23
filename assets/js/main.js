@@ -33,16 +33,27 @@ $("#run-search").on("click", function(event) {
             let initialDate = response.events[i].datetime_local;
             let m = moment(initialDate, 'YYYY-MM-DDThh:mm:ss');
             let convertedDate = $(`<li class='event-data'> ${m.format('ll')} </li>`);
-            let location = $(`<li class='event-data'> ${response.events[i].venue.display_location} </li>`);
+            let location = $(`<li class='event-data local' id='${response.events[i].venue.postal_code}'>${response.events[i].venue.display_location}</li>`);
             let venue = $(`<li class='event-data'> ${response.events[i].venue.name} </li>`);
             let seatgeekURL = $(`<li class='event-data'><a href='${response.events[i].url}' target='_blank'>Tickets</a></li>`);
 
             let results = $('<ul>').addClass('each-event d-flex flex-row justify-content-around'); 
             results.append(title, convertedDate, location, venue, seatgeekURL);
             $('#event-section').append(results);
-    }
-
+        }
     });
 });
   
 $("#clear-all").on("click", clear);
+
+$(document).on('click', '.local', function() {
+    let search = $(this).attr('id');
+    let query = `https://api.openweathermap.org/data/2.5/weather?q=${search}&APPID=3768f4c0e12f6d0baae543410dcc2366`;
+    $.ajax({
+        url: query,
+        method: 'GET'
+    }).then(function(response) {
+        console.log(response);
+    });
+    
+});
