@@ -70,24 +70,34 @@ $("#run-search").on("click", function(event) {
       url: queryURL,
       method: "GET"
     }).then(function(response) {
+      console.log('the response', response);
         let events = response.events.length; 
-
+        let title;
         for (let i = 0; i < events; i++) {
-            let title = $(`<li class='event-data'><a href='#'>${response.events[i].title}</a></li>`);
+          var tr = $('<tr>');
+            title = $(`<td class='event-data'><a href='#'>${response.events[i].title}</a></td>`);
             let initialDate = response.events[i].datetime_local;
             let m = moment(initialDate, 'YYYY-MM-DDThh:mm:ss');
             // let convertedDate = $(`<li class='event-data'>${m.format('ll')}</li>`);
             // let location = $(`<li class='event-data'>${response.events[i].venue.display_location}</li>`);
             // let venue = $(`<li class='event-data'>${response.events[i].venue.name}</li>`);
-            let convertedDate = $(`<li class='event-data'> ${m.format('ll')} </li>`);
-            let location = $(`<li class='event-data local' id='${response.events[i].venue.postal_code}'>${response.events[i].venue.display_location}</li>`);
-            let venue = $(`<li class='event-data'> ${response.events[i].venue.name} </li>`);
-            let seatgeekURL = $(`<li class='event-data'><a href='${response.events[i].url}' target='_blank'>Tickets</a></li>`);
+            let convertedDate = $(`<td class='event-data'> ${m.format('ll')} </td>`);
+            let location = $(`<td class='event-data local' id='${response.events[i].venue.postal_code}'>${response.events[i].venue.display_location}</td>`);
+            let venue = $(`<td class='event-data'> ${response.events[i].venue.name} </td>`);
+            let seatgeekURL = $(`<td class='event-data'><a href='${response.events[i].url}' target='_blank'>Tickets</a></td>`);
             let results = $('<ul>').addClass('each-event d-flex flex-row justify-content-around'); 
             results.append(title, convertedDate, location, venue, seatgeekURL);
-            $('#event-section').append(results);
-        }
-    });
+           // $('#event-section').append(results);
+            $(tr).append(title);
+            $(tr).append(convertedDate);
+            $(tr).append(location);
+            $(tr).append(venue);
+            $(tr).append(seatgeekURL);
+            $('tbody').append(tr);
+          }
+
+        });
+        
 });
   
 $("#clear-all").on("click", clear);
