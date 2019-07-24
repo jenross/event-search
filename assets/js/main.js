@@ -79,7 +79,7 @@ $("#run-search").on("click", function(event) {
             // let convertedDate = $(`<li class='event-data'>${m.format('ll')}</li>`);
             // let location = $(`<li class='event-data'>${response.events[i].venue.display_location}</li>`);
             // let venue = $(`<li class='event-data'>${response.events[i].venue.name}</li>`);
-            let convertedDate = $(`<li class='event-data'> ${m.format('ll')} </li>`);
+            let convertedDate = $(`<li class='event-data time' lon='${response.events[i].venue.location.lon}' lat='${response.events[i].venue.location.lat}' data='${m.unix()}'> ${m.format('ll')} </li>`);
             let location = $(`<li class='event-data local' id='${response.events[i].venue.postal_code}'>${response.events[i].venue.display_location}</li>`);
             let venue = $(`<li class='event-data'> ${response.events[i].venue.name} </li>`);
             let seatgeekURL = $(`<li class='event-data'><a href='${response.events[i].url}' target='_blank'>Tickets</a></li>`);
@@ -98,16 +98,26 @@ $(document).on('click', '.event-data', function() {
 
 });
 
-$(document).on('click', '.local', function() {
+$(document).on('click', '#testing', function() {
   alert('here');
-    let search = $(this).attr('id');
-    let query = `https://api.openweathermap.org/data/2.5/weather?q=${search}&APPID=3768f4c0e12f6d0baae543410dcc2366`;
+    // let search = $(this).attr('id');
+    let key = '12724b927d4f4953cb2ccec4a297225c';
+    let lat = $(this).attr('lat');
+    let lon = $(this).attr('lon');
+    let time = $(this).attr('data');
+    // let query = `https://api.darksky.net/forecast/${key}/${lat},${lon},${time}`
+    let query = 'https://api.darksky.net/forecast/12724b927d4f4953cb2ccec4a297225c/28.3541,-80.7242,1563867000';
+    console.log(query);
+    // let query = `https://api.openweathermap.org/data/2.5/weather?q=${search}&APPID=3768f4c0e12f6d0baae543410dcc2366`;
     $.ajax({
         url: query,
-        method: 'GET'
+        method: 'GET',
+        headers: {
+          'Access-Control-Request-Headers': '*'
+
+      },
     }).then(function(response) {
         console.log(response);
     });
-    
 });
 
