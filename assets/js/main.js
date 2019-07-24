@@ -98,26 +98,15 @@ $(document).on('click', '.event-data', function() {
 
 });
 
-$(document).on('click', '#testing', function() {
+$(document).on('click', '.local', function() {
   alert('here');
-    // let search = $(this).attr('id');
-    let key = '12724b927d4f4953cb2ccec4a297225c';
-    let lat = $(this).attr('lat');
-    let lon = $(this).attr('lon');
-    let time = $(this).attr('data');
-    // let query = `https://api.darksky.net/forecast/${key}/${lat},${lon},${time}`
-    let query = 'https://api.darksky.net/forecast/12724b927d4f4953cb2ccec4a297225c/28.3541,-80.7242,1563867000';
-    console.log(query);
-    // let query = `https://api.openweathermap.org/data/2.5/weather?q=${search}&APPID=3768f4c0e12f6d0baae543410dcc2366`;
-    $.ajax({
-        url: query,
-        method: 'GET',
-        headers: {
-          'Access-Control-Request-Headers': '*'
-
-      },
-    }).then(function(response) {
-        console.log(response);
-    });
+  let search = $(this).attr('id');
+  let query = `https://api.openweathermap.org/data/2.5/weather?q=${search}&APPID=3768f4c0e12f6d0baae543410dcc2366`;
+  console.log(query);
+  $.ajax({
+    url: query,
+    method: 'GET',
+  }).then(function(response) {
+    console.log(response);
+  });
 });
-
