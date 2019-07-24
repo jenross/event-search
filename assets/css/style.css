@@ -3,6 +3,16 @@
     margin: 0; padding: 0;
 }
 
+.btn btn-default {
+border: 1px solid #f48fb1;
+box-shadow: 0 0 0 1px #f48fb1;
+}
+
+
+
+
+
+
 .each-event {
     list-style-type: none; 
     border-bottom: 1px solid black; 

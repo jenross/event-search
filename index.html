@@ -36,30 +36,57 @@
         <form role="form">
 
             
-          <div class="form-group">
+          <div class="form-group text-white">
             <label for="search">Search by artist, team, city or venue:</label>
             <input type="text" class="form-control" id="search-term" placeholder="e.g, Imagine Dragons">
           </div>
 
             
-          <button type="submit" class="btn btn-default" id="run-search">Search</button>
-          <button class="btn btn-default" id="clear-all">Clear Results</button>
+          <button type="submit" class="btn btn-default text-white" id="run-search">Search</button>
+          <button class="btn btn-default text-white" id="clear-all">Clear Results</button>
 
         </form>
       </div>
     </div>
-    
-    <div class="row">
+<!--     
+    <div class="rows">
       <div class="col-sm-12">
         <br>
         <div class="card">
           <div class="card-header">
             <strong><i class="table-header"></i>Top Events</strong>
           </div>
-          <div class="card-body" id="event-section"></div>
+          <div class="card-body table-dark" id="event-section"></div>
         </div>
       </div>
-    </div>
+    </div> -->
+
+
+    <div class="rows">
+        <div class="col-sm-12">
+          <br>
+          <div class="card">
+            <div class="card-header">
+              <strong><i class="table-header"></i> Top Events</strong>
+            </div>
+            <table class="table table-hover table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">Upcoming Shows:</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">City, State</th>
+                    <th scope="col">Venue</th>
+                    <th scope="col">Tickets:</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            <!-- <div class="card-body table-dark" id="event-section"></div> -->
+          </div>
+        </div>
+      </div>
+
+    
 
     <div class="row">
       <div class="col-sm-12 skyscanner mt-3">
