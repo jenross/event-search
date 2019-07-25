@@ -1,5 +1,3 @@
-hideSkyScanner(); 
-
 (function () {
 
     var bv = new Bideo();
@@ -39,14 +37,6 @@ hideSkyScanner();
       }
     });
   }());
-
-function hideSkyScanner() {
-    $('.skyscanner').hide(); 
-}
-
-function showSkyScanner() {
-    $('.skyscanner').show();  
-}
 
 function buildQueryURL() {
     let search = $('#search-term').val().trim(); 
@@ -96,12 +86,6 @@ $("#run-search").on("click", function(event) {
 
         });
         
-});
-  
-$("#clear-all").on("click", clear);
-
-$(document).on('click', '.event-data', function() {
-    showSkyScanner(); 
 });
 
 $(document).on('click', '.local', function() {
