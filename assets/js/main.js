@@ -113,22 +113,22 @@ $(document).on('click', '#townBtn', function() {
 
 // Weather API
 $(document).on('click', '#weatherBtn', function() {
+  $('#result-title').text('Local Weather');
+  let location = $('#resultsBtn').attr('data-location');
 
   // Change active tab
   $('#weatherBtn').attr('class', 'nav-link active');
   $('#townBtn').attr('class', 'nav-link');
 
-  // Weather API Call
-  // $(document).on('click', '.local', function() {
-  //   let search = $(this).attr('id');
-  //   let query = `https://api.openweathermap.org/data/2.5/weather?q=${search}&APPID=3768f4c0e12f6d0baae543410dcc2366`;
-  //   console.log(query);
-  //   $.ajax({
-  //     url: query,
-  //     method: 'GET',
-  //   }).then(function(response) {
-  //     console.log(response);
-  //     $('#results').html(`${response}`);
-  //   });
-  // });
+  let query = `https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=3768f4c0e12f6d0baae543410dcc2366`;
+  console.log(query);
+
+  $.ajax({
+    url: query,
+    method: 'GET',
+  }).then(function(response) {
+    console.log(response);
+    let results = response.weather[0].description;
+    $('#results').html(`${results}`);
+  });
 });
