@@ -100,3 +100,35 @@ $.ajax({
   console.log(response);
 });
 });
+
+$(document).on('click', '#resultsBtn', function() {
+  $('#results-box').show();
+  $('#search-bar').hide();
+});
+
+$(document).on('click', '#townBtn', function() {
+  $('#townBtn').attr('class', 'nav-link active');
+  $('#weatherBtn').attr('class', 'nav-link');
+});
+
+// Weather API
+$(document).on('click', '#weatherBtn', function() {
+
+  // Change active tab
+  $('#weatherBtn').attr('class', 'nav-link active');
+  $('#townBtn').attr('class', 'nav-link');
+
+  // Weather API Call
+  // $(document).on('click', '.local', function() {
+  //   let search = $(this).attr('id');
+  //   let query = `https://api.openweathermap.org/data/2.5/weather?q=${search}&APPID=3768f4c0e12f6d0baae543410dcc2366`;
+  //   console.log(query);
+  //   $.ajax({
+  //     url: query,
+  //     method: 'GET',
+  //   }).then(function(response) {
+  //     console.log(response);
+  //     $('#results').html(`${response}`);
+  //   });
+  // });
+});
