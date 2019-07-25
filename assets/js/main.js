@@ -113,8 +113,10 @@ $(document).on('click', '#townBtn', function() {
 
 // Weather API
 $(document).on('click', '#weatherBtn', function() {
-  $('#result-title').text('Local Weather');
+  
   let location = $('#resultsBtn').attr('data-location');
+
+  $('#result-title').text('Local Weather for ' + location);
 
   // Change active tab
   $('#weatherBtn').attr('class', 'nav-link active');
@@ -129,6 +131,6 @@ $(document).on('click', '#weatherBtn', function() {
   }).then(function(response) {
     console.log(response);
     let results = response.weather[0].description;
-    $('#results').html(`${results}`);
+    $('#results').html(`There is ${results}.`);
   });
 });
