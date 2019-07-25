@@ -100,10 +100,8 @@ $("#run-search").on("click", function(event) {
   
 $("#clear-all").on("click", clear);
 
-
 $(document).on('click', '.event-data', function() {
     showSkyScanner(); 
-
 });
 
 $(document).on('click', '.local', function() {
