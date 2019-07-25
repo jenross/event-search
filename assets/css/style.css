@@ -73,5 +73,13 @@ html, body {
 }
 
 
+#event-table {
+  display: none;
+}
 
-
+#search-bar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

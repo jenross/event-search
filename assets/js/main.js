@@ -70,6 +70,7 @@ $("#run-search").on("click", function(event) {
       url: queryURL,
       method: "GET"
     }).then(function(response) {
+      $('#event-table').show();
       console.log('the response', response);
         let events = response.events.length; 
         let title;
