@@ -73,11 +73,13 @@ html, body {
 }
 
 
-#event-table {
+#event-table,
+#results-box {
   display: none;
 }
 
-#search-bar {
+#search-bar,
+#results-box {
   position: absolute;
   top: 50%;
   left: 50%;
