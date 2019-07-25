@@ -117,20 +117,34 @@ $(document).on('click', '#weatherBtn', function() {
   let location = $('#resultsBtn').attr('data-location');
 
   $('#result-title').text('Local Weather for ' + location);
-
+  $('#results').empty();
   // Change active tab
   $('#weatherBtn').attr('class', 'nav-link active');
   $('#townBtn').attr('class', 'nav-link');
 
-  let query = `https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=3768f4c0e12f6d0baae543410dcc2366`;
-  console.log(query);
+  let locationQuery = `https://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=JmVIFm5N5S9A6D5BnIBp0ah5tVJIg9GA&q=${location}`;
+  let locationCode = '';
 
   $.ajax({
-    url: query,
+    url: locationQuery,
     method: 'GET',
   }).then(function(response) {
-    console.log(response);
-    let results = response.weather[0].description;
-    $('#results').html(`There is ${results}.`);
+    locationCode = response[0].Key;
+    console.log(locationCode);
+    let query = `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationCode}?apikey=JmVIFm5N5S9A6D5BnIBp0ah5tVJIg9GA`;
+    console.log(query);
+    $.ajax({
+      url: query,
+      method: 'GET',
+    }).then(function(response) {
+      console.log(response);
+      let results = response.DailyForecasts;
+      
+      results.forEach(element => {
+        let forecast = element.Day.IconPhrase;
+        let day = element.Date;
+        $('#results').append(`<p>It is ${forecast} on ${day}.</p>`);
+      });
+    });
   });
 });
