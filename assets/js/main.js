@@ -134,12 +134,24 @@ let aroundTown = function() {
   
     response.forEach(function(e, i) {
       let venueName = results.response.groups[0].items[i].venue.name;
-      let venueLat = results.response.groups[0].items[i].venue.location.lat;
-      let venueLng = results.response.groups[0].items[i].venue.location.lng;
+      let venueLat = parseFloat(results.response.groups[0].items[i].venue.location.lat);
+      let venueLng = parseFloat(results.response.groups[0].items[i].venue.location.lng);
       console.log(venueName);
+
+      var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: 'Hello World!'
+      });
     });
     console.log('gMaps: ' + lat + ' ' + lon);
     initMap(lat, lon);
+    var marker = new google.maps.Marker({
+      position: {lat: lat, lng, lon},
+      map: map,
+      title: 'Hello World!'
+    });
+    marker;
  });
 }
 
