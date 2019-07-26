@@ -45,13 +45,13 @@ function buildQueryURL() {
 
   console.log(initialQueryURL);
   return initialQueryURL;
-}
-
+};
 
 function clear() {
   $("#event-section").empty();
-}
+};
 
+// Start Page Search Button 
 $("#run-search").on("click", function(event) {
   event.preventDefault();
   $('#search-bar').hide();
@@ -86,34 +86,36 @@ $("#run-search").on("click", function(event) {
         }
 
       });
-      
 });
 
+// Events Page More Info Button
 $(document).on('click', '#resultsBtn', function() {
   $('#results-box').show();
   $('#search-bar').hide();
   $('#event-table').hide();
 });
 
+// Results Page Town Tab
 $(document).on('click', '#townBtn', function() {
   $('#townBtn').attr('class', 'nav-link active');
   $('#weatherBtn').attr('class', 'nav-link');
 });
 
-// Weather API
+// Results Page Weather Tab
 $(document).on('click', '#weatherBtn', function() {
   
   let location = $('#resultsBtn').attr('id_zip');
 
-  
   $('#results').empty();
+  $('#insert-table').html('');
+  $('#goBtn').hide();
+
   // Change active tab
   $('#weatherBtn').attr('class', 'nav-link active');
   $('#townBtn').attr('class', 'nav-link');
 
   let locationQuery = `https://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=JmVIFm5N5S9A6D5BnIBp0ah5tVJIg9GA&q=${location}`;
   
-
   $.ajax({
     url: locationQuery,
     method: 'GET',
