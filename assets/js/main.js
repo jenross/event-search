@@ -62,7 +62,7 @@ $("#run-search").on("click", function(event) {
     method: "GET"
   }).then(function(response) {
     $('#event-table').show();
-    console.log('the response', response);
+    // console.log('the response', response);
       let events = response.events.length; 
       let title;
       for (let i = 0; i < events; i++) {
@@ -93,12 +93,37 @@ $(document).on('click', '#resultsBtn', function() {
   $('#results-box').show();
   $('#search-bar').hide();
   $('#event-table').hide();
+  aroundTown();
 });
 
 // Results Page Town Tab
-$(document).on('click', '#townBtn', function() {
+let aroundTown = function() {
   $('#townBtn').attr('class', 'nav-link active');
   $('#weatherBtn').attr('class', 'nav-link');
+  // $('#weather-table').empty();
+
+  const clientID = "LMTVE3CNXEET1N3OERSA0SYN0WK0WVXIAWKKB4R4FZ5APF1A";
+  const clientSecret = "1GDFGDPYK3BYDW4OJJIN12UHHHIR3Y4HHHN3GXOG5RREK4LN";
+  let zip = $('#resultsBtn').attr('id_zip');
+  let location = $('#resultsBtn').attr('id_location');
+  let queryURL = `https://api.foursquare.com/v2/venues/explore?client_id=${clientID}&client_secret=${clientSecret}&v=20190701&near=${location}&zip=${zip}&radius=1000&section=food&section=drinks&section=nightlife&limit=25`;
+  
+  console.log(queryURL);
+  $.ajax({
+      url: queryURL,
+      method: "GET"
+  }).then(function(results) {
+    console.log(results);
+  let response = results.response.groups.length;
+  let venueName = results.response.groups[i].items[i].venue.name;
+  let venueLat = results.response.groups[i].items[i].venue.location.lat;
+  let venueLng = results.response.groups[i].items[i].venue.location.lng;
+
+ });
+}
+
+$(document).on('click', '#townBtn', function() {
+  aroundTown();
 });
 
 // Results Page Weather Tab
@@ -155,37 +180,6 @@ $(document).on('click', '#weatherBtn', function() {
     });
   });
 });
-
-// $(document).on('click', '.btn-primary', function() {
-//   alert('heyyo');
-
-//   const clientID = "LMTVE3CNXEET1N3OERSA0SYN0WK0WVXIAWKKB4R4FZ5APF1A";
-//   const clientSecret = "1GDFGDPYK3BYDW4OJJIN12UHHHIR3Y4HHHN3GXOG5RREK4LN";
-//   let zip = $(this).attr('id_zip');
-//   let location = $(this).attr('id_location');
-//   let queryURL = `https://api.foursquare.com/v2/venues/explore?client_id=${clientID}&client_secret=${clientSecret}&v=20190701&near=${location}&zip=${zip}&radius=1000&section=food&section=drinks&section=nightlife&limit=25`;
-  
-//   console.log(queryURL);
-//   $.ajax({
-//       url: queryURL,
-//       method: "GET"
-//   }).then(function(results) {
-//     let response = results.response.groups.length;
-//     let venueName = results.response.groups[i].items[i].venue.name;
-//     let venueLat = results.response.groups[i].items[i].venue.location.lat;
-//     let venueLng = results.response.groups[i].items[i].venue.location.lng;
-//   //  console.log(results.response.groups[0].items[0].venue.name);
-//   //  console.log(results.response.groups[0].items[0].venue.location.lat);
-//   //  console.log(results.response.groups[0].items[0].venue.location.lng);
-
-//     // for (let i = 0; i < response; i++) {
-//     //   ${venueName};
-//     //   ${venueLat};
-//     //   ${venueLng};
-//     // }
-//  })
-
-// });
 
 // var map;
 //       function initMap() {
