@@ -146,12 +146,6 @@ let aroundTown = function() {
     });
     console.log('gMaps: ' + lat + ' ' + lon);
     initMap(lat, lon);
-    var marker = new google.maps.Marker({
-      position: {lat: lat, lng, lon},
-      map: map,
-      title: 'Hello World!'
-    });
-    marker;
  });
 }
 
