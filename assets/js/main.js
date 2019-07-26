@@ -116,20 +116,22 @@ $(document).on('click', '#weatherBtn', function() {
   
   let location = $('#resultsBtn').attr('data-location');
 
-  $('#result-title').text('Local Weather for ' + location);
+  
   $('#results').empty();
   // Change active tab
   $('#weatherBtn').attr('class', 'nav-link active');
   $('#townBtn').attr('class', 'nav-link');
 
   let locationQuery = `https://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=JmVIFm5N5S9A6D5BnIBp0ah5tVJIg9GA&q=${location}`;
-  let locationCode = '';
+  
 
   $.ajax({
     url: locationQuery,
     method: 'GET',
   }).then(function(response) {
-    locationCode = response[0].Key;
+    let locationCode = response[0].Key;
+    let local = response[0].EnglishName + ' ' + response[0].AdministrativeArea.LocalizedName;
+    $('#result-title').text('Local Weather for ' + local);
     console.log(locationCode);
     let query = `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationCode}?apikey=JmVIFm5N5S9A6D5BnIBp0ah5tVJIg9GA`;
     console.log(query);
@@ -140,14 +142,19 @@ $(document).on('click', '#weatherBtn', function() {
       console.log(response);
       let results = response.DailyForecasts;
       $('#weather-table').show();
+      $('#extraBtn').hide();
       results.forEach(element => {
         let forecast = element.Day.IconPhrase;
-        let day = element.Date;
+        let day = moment(element.Date, 'YYYY-MM-DDThh:mm:ss').format('ll');
+        let temp = element.Temperature.Minimum.Value + '/' + element.Temperature.Maximum.Value;
+        let rain = element.Day.PrecipitationIntensity;
 
         let table = `
           <tr>
             <td>${day}</td>
             <td>${forecast}</td>
+            <td>${temp} °F</td>
+            <td>${rain}</td>
           </tr>
         `
         $('#insert-table').append(table);
