@@ -121,3 +121,9 @@ body {
   margin-left: 40%;
   padding-bottom: 31px;
 }
+
+.customTable {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: inherit;
+  padding: 3%;
+}
