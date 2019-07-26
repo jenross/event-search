@@ -114,11 +114,17 @@ let aroundTown = function() {
       method: "GET"
   }).then(function(results) {
     console.log(results);
-  let response = results.response.groups.length;
-  let venueName = results.response.groups[i].items[i].venue.name;
-  let venueLat = results.response.groups[i].items[i].venue.location.lat;
-  let venueLng = results.response.groups[i].items[i].venue.location.lng;
+  let response = results.response.groups[0].items;
+  console.log(response);
+  
+    response.forEach(function(e, i) {
+      let venueName = results.response.groups[0].items[i].venue.name;
+      let venueLat = results.response.groups[0].items[i].venue.location.lat;
+      let venueLng = results.response.groups[0].items[i].venue.location.lng;
+      console.log(venueName);
+    });
 
+    initMap();
  });
 }
 
@@ -181,10 +187,12 @@ $(document).on('click', '#weatherBtn', function() {
   });
 });
 
-// var map;
-//       function initMap() {
-//         map = new google.maps.Map(document.getElementById('map'), {
-//           center: {lat: -34.397, lng: 150.644},
-//           zoom: 8
-//         });
-//       }
+let initMap = function() {
+  var map;
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: -34.397, lng: 150.644},
+      zoom: 8
+    });
+  }
+}

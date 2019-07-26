@@ -104,3 +104,7 @@ html, body {
   margin: 0 auto;
   clear: both;
   }
+
+#map {
+  height: 100%;
+}
