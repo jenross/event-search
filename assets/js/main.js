@@ -133,7 +133,7 @@ $(document).on('click', '#weatherBtn', function() {
     let local = response[0].EnglishName + ' ' + response[0].AdministrativeArea.LocalizedName;
     $('#result-title').text('Local Weather for ' + local);
     console.log(locationCode);
-    let query = `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationCode}?apikey=JmVIFm5N5S9A6D5BnIBp0ah5tVJIg9GA`;
+    let query = `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationCode}?apikey=JmVIFm5N5S9A6D5BnIBp0ah5tVJIg9GA&details=true`;
     console.log(query);
     $.ajax({
       url: query,
@@ -148,6 +148,7 @@ $(document).on('click', '#weatherBtn', function() {
         let day = moment(element.Date, 'YYYY-MM-DDThh:mm:ss').format('ll');
         let temp = element.Temperature.Minimum.Value + '/' + element.Temperature.Maximum.Value;
         let rain = element.Day.PrecipitationIntensity;
+        let sun = moment(element.Sun.Rise, 'YYYY-MM-DDThh:mm:ss').format('h:mm') + ' AM/' +  moment(element.Sun.Set, 'YYYY-MM-DDThh:mm:ss').format('h:mm') + ' PM';
 
         let table = `
           <tr>
@@ -155,6 +156,7 @@ $(document).on('click', '#weatherBtn', function() {
             <td><img src='assets/images/${forecast}-s.png'></td>
             <td>${temp} °F</td>
             <td>${rain}</td>
+            <td>${sun}</td>
           </tr>
         `
         $('#insert-table').append(table);
