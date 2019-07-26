@@ -54,6 +54,7 @@ function clear() {
 
 $("#run-search").on("click", function(event) {
   event.preventDefault();
+  $('#search-bar').hide();
   clear();
   let queryURL = buildQueryURL();
   $.ajax({
@@ -72,7 +73,7 @@ $("#run-search").on("click", function(event) {
           let convertedDate = $(`<td class='event-data'> ${m.format('ll')} </td>`);
           let location = $(`<td class='event-data local' id='${response.events[i].venue.postal_code}'>${response.events[i].venue.display_location}</td>`);
           let venue = $(`<td class='event-data'> ${response.events[i].venue.name} </td>`);
-          let moreInfo = $(`<td><a class="btn btn-primary" type="button" href='#' role="button" id_zip='${response.events[i].venue.postal_code}' id_location='${response.events[i].venue.display_location}'>More info</a></td>`);
+          let moreInfo = $(`<td><a class="btn btn-primary" id='resultsBtn' type="button" href='#' role="button" id_zip='${response.events[i].venue.postal_code}' id_location='${response.events[i].venue.display_location}'>More info</a></td>`);
 
           let results = $('<ul>').addClass('each-event d-flex flex-row justify-content-around'); 
           results.append(title, convertedDate, location, venue, moreInfo);
@@ -81,7 +82,7 @@ $("#run-search").on("click", function(event) {
           $(tr).append(location);
           $(tr).append(venue);
           $(tr).append(moreInfo);
-          $('tbody').append(tr);
+          $('#event-tbody').append(tr);
         }
 
       });
@@ -104,6 +105,7 @@ $.ajax({
 $(document).on('click', '#resultsBtn', function() {
   $('#results-box').show();
   $('#search-bar').hide();
+  $('#event-table').hide();
 });
 
 $(document).on('click', '#townBtn', function() {
@@ -114,7 +116,7 @@ $(document).on('click', '#townBtn', function() {
 // Weather API
 $(document).on('click', '#weatherBtn', function() {
   
-  let location = $('#resultsBtn').attr('data-location');
+  let location = $('#resultsBtn').attr('id_zip');
 
   
   $('#results').empty();
@@ -147,7 +149,7 @@ $(document).on('click', '#weatherBtn', function() {
         let forecast = element.Day.Icon;
         let day = moment(element.Date, 'YYYY-MM-DDThh:mm:ss').format('ll');
         let temp = element.Temperature.Minimum.Value + '/' + element.Temperature.Maximum.Value;
-        let rain = element.Day.PrecipitationIntensity;
+        let rain = element.Day.RainProbability + '%';
         let sun = moment(element.Sun.Rise, 'YYYY-MM-DDThh:mm:ss').format('h:mm') + ' AM/' +  moment(element.Sun.Set, 'YYYY-MM-DDThh:mm:ss').format('h:mm') + ' PM';
 
         let table = `
@@ -165,41 +167,41 @@ $(document).on('click', '#weatherBtn', function() {
   });
 });
 
-$(document).on('click', '.btn-primary', function() {
-  alert('heyyo');
+// $(document).on('click', '.btn-primary', function() {
+//   alert('heyyo');
 
-  const clientID = "LMTVE3CNXEET1N3OERSA0SYN0WK0WVXIAWKKB4R4FZ5APF1A";
-  const clientSecret = "1GDFGDPYK3BYDW4OJJIN12UHHHIR3Y4HHHN3GXOG5RREK4LN";
-  let zip = $(this).attr('id_zip');
-  let location = $(this).attr('id_location');
-  let queryURL = `https://api.foursquare.com/v2/venues/explore?client_id=${clientID}&client_secret=${clientSecret}&v=20190701&near=${location}&zip=${zip}&radius=1000&section=food&section=drinks&section=nightlife&limit=25`;
+//   const clientID = "LMTVE3CNXEET1N3OERSA0SYN0WK0WVXIAWKKB4R4FZ5APF1A";
+//   const clientSecret = "1GDFGDPYK3BYDW4OJJIN12UHHHIR3Y4HHHN3GXOG5RREK4LN";
+//   let zip = $(this).attr('id_zip');
+//   let location = $(this).attr('id_location');
+//   let queryURL = `https://api.foursquare.com/v2/venues/explore?client_id=${clientID}&client_secret=${clientSecret}&v=20190701&near=${location}&zip=${zip}&radius=1000&section=food&section=drinks&section=nightlife&limit=25`;
   
-  console.log(queryURL);
-  $.ajax({
-      url: queryURL,
-      method: "GET"
-  }).then(function(results) {
-    let response = results.response.groups.length;
-    let venueName = results.response.groups[i].items[i].venue.name;
-    let venueLat = results.response.groups[i].items[i].venue.location.lat;
-    let venueLng = results.response.groups[i].items[i].venue.location.lng;
-  //  console.log(results.response.groups[0].items[0].venue.name);
-  //  console.log(results.response.groups[0].items[0].venue.location.lat);
-  //  console.log(results.response.groups[0].items[0].venue.location.lng);
+//   console.log(queryURL);
+//   $.ajax({
+//       url: queryURL,
+//       method: "GET"
+//   }).then(function(results) {
+//     let response = results.response.groups.length;
+//     let venueName = results.response.groups[i].items[i].venue.name;
+//     let venueLat = results.response.groups[i].items[i].venue.location.lat;
+//     let venueLng = results.response.groups[i].items[i].venue.location.lng;
+//   //  console.log(results.response.groups[0].items[0].venue.name);
+//   //  console.log(results.response.groups[0].items[0].venue.location.lat);
+//   //  console.log(results.response.groups[0].items[0].venue.location.lng);
 
-    // for (let i = 0; i < response; i++) {
-    //   ${venueName};
-    //   ${venueLat};
-    //   ${venueLng};
-    // }
- })
+//     // for (let i = 0; i < response; i++) {
+//     //   ${venueName};
+//     //   ${venueLat};
+//     //   ${venueLng};
+//     // }
+//  })
 
-});
+// });
 
-var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
-        });
-      }
+// var map;
+//       function initMap() {
+//         map = new google.maps.Map(document.getElementById('map'), {
+//           center: {lat: -34.397, lng: 150.644},
+//           zoom: 8
+//         });
+//       }

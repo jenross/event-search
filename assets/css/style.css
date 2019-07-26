@@ -7,15 +7,15 @@
 border: 1px solid #f48fb1;
 box-shadow: 0 0 0 1px #f48fb1;
 }
-.card {
+#event-card {
   background-color: rgba(0, 0, 0, 0.5);
   padding: inherit;
  }
 
- .table-hover {
+ /* .table-hover {
   background-color: rgba(0, 0, 0, 0.63);
  }
- 
+  */
  p.title {
   color: white;
   font-size: 20px;
