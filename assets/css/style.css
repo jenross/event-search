@@ -35,13 +35,23 @@ body {
   width: 100%;
   height: 100%;
   background-color: black;
+  display: flex;
+  flex-direction: column;
 }
 #container {
   position: absolute;
+<<<<<<< HEAD
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+=======
+  top: 0; left: 0; right: 0; bottom: 0; 
+  margin-bottom: 50px;
+  display: block;
+  margin-top: 100px;
+  height: 100%;
+>>>>>>> be9cc362e5bf3b3811a4e2580d0db2a4f7cbd792
 }
 #background_video {
   position: absolute;
@@ -81,9 +91,6 @@ body {
 }
 /* Demo page specific styles */
 
-#container {
-  height: 100%;
-}
 #overlay {
   position: absolute;
   top: 0;
@@ -111,12 +118,28 @@ body {
 .footer,
 .push {
   height: 50px;
-  color: whitesmoke;
   text-align: center;
   width: 100%;
-  max-width: 960px;
   margin: 0 auto;
   clear: both;
+<<<<<<< HEAD
+=======
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  margin: 10px;
+  font-size: 13px;
+}
+
+
+#footer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+}
+
+#footer a {
+  color: rgba(255,255,255,0.5);
+  font-size: 13px;
+>>>>>>> be9cc362e5bf3b3811a4e2580d0db2a4f7cbd792
 }
 
 #map {

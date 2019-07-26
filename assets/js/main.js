@@ -38,9 +38,15 @@
 })();
 
 var map;
+<<<<<<< HEAD
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: -34.397, lng: 150.644 },
+=======
+function initMap(lat, lon) {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: lat, lng: lon},
+>>>>>>> be9cc362e5bf3b3811a4e2580d0db2a4f7cbd792
     zoom: 8
   });
 }
@@ -70,6 +76,7 @@ $("#run-search").on("click", function(event) {
     url: queryURL,
     method: "GET"
   }).then(function(response) {
+<<<<<<< HEAD
     $("#event-table").show();
     // console.log('the response', response);
     let events = response.events.length;
@@ -108,6 +115,36 @@ $("#run-search").on("click", function(event) {
       $("#event-tbody").append(tr);
     }
   });
+=======
+    console.log(response);
+    $('#event-table').show();
+    // console.log('the response', response);
+      let events = response.events.length; 
+      let title;
+      for (let i = 0; i < events; i++) {
+        var tr = $('<tr>');
+          title = $(`<td class='event-data'>${response.events[i].title}</td>`);
+          let initialDate = response.events[i].datetime_local;
+          let m = moment(initialDate, 'YYYY-MM-DDThh:mm:ss');
+          let convertedDate = $(`<td class='event-data'> ${m.format('ll')} </td>`);
+          let location = $(`<td class='event-data local' id='${response.events[i].venue.postal_code}'>${response.events[i].venue.display_location}</td>`);
+          let venue = $(`<td class='event-data'> ${response.events[i].venue.name} </td>`);
+          let lat = response.events[i].venue.location.lat;
+          let lon = response.events[i].venue.location.lon;
+          let moreInfo = $(`<td><a class="btn btn-primary" id='resultsBtn' type="button" href='#' role="button" id_zip='${response.events[i].venue.postal_code}' id_location='${response.events[i].venue.display_location}' id-lat='${lat}' id-lon='${lon}'>More info</a></td>`);
+          console.log(lat + ' ' + lon);
+          let results = $('<ul>').addClass('each-event d-flex flex-row justify-content-around'); 
+          results.append(title, convertedDate, location, venue, moreInfo);
+          $(tr).append(title);
+          $(tr).append(convertedDate);
+          $(tr).append(location);
+          $(tr).append(venue);
+          $(tr).append(moreInfo);
+          $('#event-tbody').append(tr);
+        }
+
+      });
+>>>>>>> be9cc362e5bf3b3811a4e2580d0db2a4f7cbd792
 });
 
 // Events Page More Info Button
@@ -128,8 +165,15 @@ let aroundTown = function() {
 
   const clientID = "LMTVE3CNXEET1N3OERSA0SYN0WK0WVXIAWKKB4R4FZ5APF1A";
   const clientSecret = "1GDFGDPYK3BYDW4OJJIN12UHHHIR3Y4HHHN3GXOG5RREK4LN";
+<<<<<<< HEAD
   let zip = $("#resultsBtn").attr("id_zip");
   let location = $("#resultsBtn").attr("id_location");
+=======
+  let lat = parseFloat($('#resultsBtn').attr('id-lat'));
+  let lon = parseFloat($('#resultsBtn').attr('id-lon'));
+  let zip = $('#resultsBtn').attr('id_zip');
+  let location = $('#resultsBtn').attr('id_location');
+>>>>>>> be9cc362e5bf3b3811a4e2580d0db2a4f7cbd792
   let queryURL = `https://api.foursquare.com/v2/venues/explore?client_id=${clientID}&client_secret=${clientSecret}&v=20190701&near=${location}&zip=${zip}&radius=1000&section=food&section=drinks&section=nightlife&limit=25`;
 
   console.log(queryURL);
@@ -147,10 +191,17 @@ let aroundTown = function() {
       let venueLng = results.response.groups[0].items[i].venue.location.lng;
       console.log(venueName);
     });
+<<<<<<< HEAD
 
     initMap();
   });
 };
+=======
+    console.log('gMaps: ' + lat + ' ' + lon);
+    initMap(lat, lon);
+ });
+}
+>>>>>>> be9cc362e5bf3b3811a4e2580d0db2a4f7cbd792
 
 $(document).on("click", "#townBtn", function() {
   aroundTown();
