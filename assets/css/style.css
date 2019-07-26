@@ -127,3 +127,6 @@ body {
   padding: inherit;
   padding: 3%;
 }
+.btn-primary {
+  height: 10%;
+}
