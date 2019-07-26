@@ -114,6 +114,7 @@ body {
   max-width: 960px;
   margin: 0 auto;
   clear: both;
+<<<<<<< HEAD
 }
 
 .logoStyle {
@@ -130,3 +131,12 @@ body {
 .btn-primary {
   height: 10%;
 }
+=======
+  }
+
+#map {
+  height: 300px;
+  width: 450px;
+  margin: 0 auto;
+}
+>>>>>>> b36f14a1b765d8b1cb9eb2c055059817d92bda03
