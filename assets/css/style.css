@@ -17,9 +17,12 @@
   background-color: rgba(0, 0, 0, 0.63);
  }
   */
-p.title {
+.title {
   color: white;
   font-size: 20px;
+  margin-top: -2%;
+  padding-top: 13px;
+  margin-bottom: -4px;
 }
 
 .each-event {
@@ -114,7 +117,12 @@ body {
   max-width: 960px;
   margin: 0 auto;
   clear: both;
-<<<<<<< HEAD
+}
+
+#map {
+  height: 300px;
+  width: 450px;
+  margin: 0 auto;
 }
 
 .logoStyle {
@@ -126,17 +134,30 @@ body {
 .customTable {
   background-color: rgba(0, 0, 0, 0.5);
   padding: inherit;
-  padding: 3%;
+  padding: 0%;
 }
 .btn-primary {
-  height: 10%;
+  width: 100px;
+  height: 40px;
+  border: none;
+  border: solid 2px black;
+  border-radius: 5px;
+  font-size: 15px;
+  color: black;
+  border-radius: 2%;
 }
-=======
-  }
 
-#map {
-  height: 300px;
-  width: 450px;
-  margin: 0 auto;
+.btn-primary:hover {
+  background: black;
+  color: rgb(0, 135, 252);
 }
->>>>>>> b36f14a1b765d8b1cb9eb2c055059817d92bda03
+
+.table-dark {
+  color: #fff;
+  background-color: transparent;
+}
+
+/* #customSearch {
+  display: flex;
+  top: 900px;
+} */
