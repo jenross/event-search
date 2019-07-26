@@ -205,12 +205,6 @@ let aroundTown = function() {
 =======
     console.log('gMaps: ' + lat + ' ' + lon);
     initMap(lat, lon);
-    var marker = new google.maps.Marker({
-      position: {lat: lat, lng, lon},
-      map: map,
-      title: 'Hello World!'
-    });
-    marker;
  });
 }
 >>>>>>> be9cc362e5bf3b3811a4e2580d0db2a4f7cbd792
