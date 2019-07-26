@@ -89,19 +89,6 @@ $("#run-search").on("click", function(event) {
       
 });
 
-$(document).on('click', '.local', function() {
-alert('here');
-let search = $(this).attr('id');
-let query = `https://api.openweathermap.org/data/2.5/weather?q=${search}&APPID=3768f4c0e12f6d0baae543410dcc2366`;
-console.log(query);
-$.ajax({
-  url: query,
-  method: 'GET',
-}).then(function(response) {
-  console.log(response);
-});
-});
-
 $(document).on('click', '#resultsBtn', function() {
   $('#results-box').show();
   $('#search-bar').hide();
