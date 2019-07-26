@@ -157,7 +157,7 @@ body {
   background-color: transparent;
 }
 
-/* #customSearch {
+#customSearch {
   display: flex;
-  top: 900px;
-} */
+  top: 200%;
+}
