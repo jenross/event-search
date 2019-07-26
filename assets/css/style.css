@@ -107,7 +107,7 @@ html, body {
   color: rgba(255,255,255,0.5);
   text-decoration: none;
   margin: 10px;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 
@@ -118,8 +118,7 @@ html, body {
 
 #footer a {
   color: rgba(255,255,255,0.5);
-  text-decoration: none;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 #map {
