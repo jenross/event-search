@@ -38,6 +38,14 @@
   });
 }());
 
+var map;
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: -34.397, lng: 150.644},
+    zoom: 8
+  });
+}
+
 function buildQueryURL() {
   let search = $('#search-term').val().trim(); 
   const APIKEY = 'MTUwOTcwMjd8MTU2MzQ2MzA4Ny42OQ';
@@ -187,12 +195,5 @@ $(document).on('click', '#weatherBtn', function() {
   });
 });
 
-let initMap = function() {
-  var map;
-  function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: -34.397, lng: 150.644},
-      zoom: 8
-    });
-  }
-}
+
+ 
