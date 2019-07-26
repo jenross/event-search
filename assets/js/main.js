@@ -106,6 +106,8 @@ $(document).on('click', '#resultsBtn', function() {
 
 // Results Page Town Tab
 let aroundTown = function() {
+  $('#map').show();
+  $('#weather-table').hide();
   $('#townBtn').attr('class', 'nav-link active');
   $('#weatherBtn').attr('class', 'nav-link');
   // $('#weather-table').empty();
@@ -145,7 +147,9 @@ $(document).on('click', '#weatherBtn', function() {
   
   let location = $('#resultsBtn').attr('id_zip');
 
+  $('#weather-table').show();
   $('#results').empty();
+  $('#map').hide();
   $('#insert-table').html('');
   $('#goBtn').hide();
 
