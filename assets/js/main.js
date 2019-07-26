@@ -139,11 +139,18 @@ $(document).on('click', '#weatherBtn', function() {
     }).then(function(response) {
       console.log(response);
       let results = response.DailyForecasts;
-      
+      $('#weather-table').show();
       results.forEach(element => {
         let forecast = element.Day.IconPhrase;
         let day = element.Date;
-        $('#results').append(`<p>It is ${forecast} on ${day}.</p>`);
+
+        let table = `
+          <tr>
+            <td>${day}</td>
+            <td>${forecast}</td>
+          </tr>
+        `
+        $('#insert-table').append(table);
       });
     });
   });
