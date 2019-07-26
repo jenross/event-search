@@ -144,7 +144,7 @@ $(document).on('click', '#weatherBtn', function() {
       $('#weather-table').show();
       $('#extraBtn').hide();
       results.forEach(element => {
-        let forecast = element.Day.IconPhrase;
+        let forecast = element.Day.Icon;
         let day = moment(element.Date, 'YYYY-MM-DDThh:mm:ss').format('ll');
         let temp = element.Temperature.Minimum.Value + '/' + element.Temperature.Maximum.Value;
         let rain = element.Day.PrecipitationIntensity;
@@ -152,7 +152,7 @@ $(document).on('click', '#weatherBtn', function() {
         let table = `
           <tr>
             <td>${day}</td>
-            <td>${forecast}</td>
+            <td><img src='assets/images/${forecast}-s.png'></td>
             <td>${temp} °F</td>
             <td>${rain}</td>
           </tr>
