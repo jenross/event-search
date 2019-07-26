@@ -66,21 +66,21 @@ $("#run-search").on("click", function(event) {
       let title;
       for (let i = 0; i < events; i++) {
         var tr = $('<tr>');
-          title = $(`<td class='event-data'><a href='#'>${response.events[i].title}</a></td>`);
+          title = $(`<td class='event-data'>${response.events[i].title}</td>`);
           let initialDate = response.events[i].datetime_local;
           let m = moment(initialDate, 'YYYY-MM-DDThh:mm:ss');
           let convertedDate = $(`<td class='event-data'> ${m.format('ll')} </td>`);
           let location = $(`<td class='event-data local' id='${response.events[i].venue.postal_code}'>${response.events[i].venue.display_location}</td>`);
           let venue = $(`<td class='event-data'> ${response.events[i].venue.name} </td>`);
-          let seatgeekURL = $(`<td class='event-data'><a href='${response.events[i].url}' target='_blank'>Tickets</a></td>`);
+          let moreInfo = $(`<td><a class="btn btn-primary" type="button" href='#' role="button" id_zip='${response.events[i].venue.postal_code}' id_location='${response.events[i].venue.display_location}'>More info</a></td>`);
 
           let results = $('<ul>').addClass('each-event d-flex flex-row justify-content-around'); 
-          results.append(title, convertedDate, location, venue, seatgeekURL);
+          results.append(title, convertedDate, location, venue, moreInfo);
           $(tr).append(title);
           $(tr).append(convertedDate);
           $(tr).append(location);
           $(tr).append(venue);
-          $(tr).append(seatgeekURL);
+          $(tr).append(moreInfo);
           $('tbody').append(tr);
         }
 
@@ -148,3 +148,42 @@ $(document).on('click', '#weatherBtn', function() {
     });
   });
 });
+
+$(document).on('click', '.btn-primary', function() {
+  alert('heyyo');
+
+  const clientID = "LMTVE3CNXEET1N3OERSA0SYN0WK0WVXIAWKKB4R4FZ5APF1A";
+  const clientSecret = "1GDFGDPYK3BYDW4OJJIN12UHHHIR3Y4HHHN3GXOG5RREK4LN";
+  let zip = $(this).attr('id_zip');
+  let location = $(this).attr('id_location');
+  let queryURL = `https://api.foursquare.com/v2/venues/explore?client_id=${clientID}&client_secret=${clientSecret}&v=20190701&near=${location}&zip=${zip}&radius=1000&section=food&section=drinks&section=nightlife&limit=25`;
+  
+  console.log(queryURL);
+  $.ajax({
+      url: queryURL,
+      method: "GET"
+  }).then(function(results) {
+    let response = results.response.groups.length;
+    let venueName = results.response.groups[i].items[i].venue.name;
+    let venueLat = results.response.groups[i].items[i].venue.location.lat;
+    let venueLng = results.response.groups[i].items[i].venue.location.lng;
+  //  console.log(results.response.groups[0].items[0].venue.name);
+  //  console.log(results.response.groups[0].items[0].venue.location.lat);
+  //  console.log(results.response.groups[0].items[0].venue.location.lng);
+
+    // for (let i = 0; i < response; i++) {
+    //   ${venueName};
+    //   ${venueLat};
+    //   ${venueLng};
+    // }
+ })
+
+});
+
+var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        });
+      }
