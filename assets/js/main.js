@@ -84,7 +84,7 @@ $("#run-search").on("click", function(event) {
           let venue = $(`<td class='event-data'> ${response.events[i].venue.name} </td>`);
           let lat = response.events[i].venue.location.lat;
           let lon = response.events[i].venue.location.lon;
-          let moreInfo = $(`<td><a class="btn btn-primary" id='resultsBtn' type="button" href='#' role="button" id_zip='${response.events[i].venue.postal_code}' id_location='${response.events[i].venue.display_location}' id-lat='${lat}' id-lng='${lon}'>More info</a></td>`);
+          let moreInfo = $(`<td><a class="btn btn-primary" id='resultsBtn' type="button" href='#' role="button" id_zip='${response.events[i].venue.postal_code}' id_location='${response.events[i].venue.display_location}' id-lat='${lat}' id-lon='${lon}'>More info</a></td>`);
           console.log(lat + ' ' + lon);
           let results = $('<ul>').addClass('each-event d-flex flex-row justify-content-around'); 
           results.append(title, convertedDate, location, venue, moreInfo);
@@ -117,8 +117,8 @@ let aroundTown = function() {
 
   const clientID = "LMTVE3CNXEET1N3OERSA0SYN0WK0WVXIAWKKB4R4FZ5APF1A";
   const clientSecret = "1GDFGDPYK3BYDW4OJJIN12UHHHIR3Y4HHHN3GXOG5RREK4LN";
-  let lat = $('#resultsBtn').attr('id-lat');
-  let lon = $('#resultsBtn').attr('id-lon');
+  let lat = parseFloat($('#resultsBtn').attr('id-lat'));
+  let lon = parseFloat($('#resultsBtn').attr('id-lon'));
   let zip = $('#resultsBtn').attr('id_zip');
   let location = $('#resultsBtn').attr('id_location');
   let queryURL = `https://api.foursquare.com/v2/venues/explore?client_id=${clientID}&client_secret=${clientSecret}&v=20190701&near=${location}&zip=${zip}&radius=1000&section=food&section=drinks&section=nightlife&limit=25`;
@@ -138,8 +138,8 @@ let aroundTown = function() {
       let venueLng = results.response.groups[0].items[i].venue.location.lng;
       console.log(venueName);
     });
-
-    initMap(parseFloat(lat), parseFloat(lon));
+    console.log('gMaps: ' + lat + ' ' + lon);
+    initMap(lat, lon);
  });
 }
 
