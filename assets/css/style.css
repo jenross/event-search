@@ -1,4 +1,4 @@
-* {
+* { 
     box-sizing: border-box; 
     margin: 0; padding: 0;
 }
@@ -7,11 +7,19 @@
 border: 1px solid #f48fb1;
 box-shadow: 0 0 0 1px #f48fb1;
 }
+.card {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: inherit;
+ }
 
-
-
-
-
+ .table-hover {
+  background-color: rgba(0, 0, 0, 0.63);
+ }
+ 
+ p.title {
+  color: white;
+  font-size: 20px;
+ }
 
 .each-event {
     list-style-type: none; 
@@ -21,10 +29,9 @@ box-shadow: 0 0 0 1px #f48fb1;
 html, body {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  background-color: black;
 }
 #container {
-  overflow: hidden;
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
 }
