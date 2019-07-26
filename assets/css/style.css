@@ -94,3 +94,13 @@ html, body {
   transform: translate(-50%, -50%);
   opacity: .777;
 }
+
+.footer,.push {
+  height: 50px;
+  color: whitesmoke;
+  text-align: center;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  clear: both;
+  }
