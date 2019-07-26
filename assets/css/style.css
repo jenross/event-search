@@ -81,7 +81,8 @@ html, body {
 
 
 #event-table,
-#results-box {
+#results-box,
+#weather-table {
   display: none;
 }
 
