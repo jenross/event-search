@@ -49,7 +49,7 @@ function initMap(lat, lon) {
     center: location,
     zoom: 8
   });
-  makeMarker(location);
+  // makeMarker(location);
 }
 
 function makeMarker(coord) {
@@ -117,11 +117,12 @@ $(document).on('click', '.resultsBtn', function() {
   gZip = $(this).attr('id_zip');
   gLat = parseFloat($(this).attr('id-lat'));
   gLon = parseFloat($(this).attr('id-lon'));
-  aroundTown(gLat, gLon);
+  gLocation = $(this).attr('id_location');
+  aroundTown(gLat, gLon, gZip, gLocation);
 });
 
 // Results Page Town Tab
-let aroundTown = function(lat, lon) {
+let aroundTown = function(lat, lon, zip, location) {
   $('#map').show();
   $('#weather-table').hide();
   $('#townBtn').attr('class', 'nav-link active');
@@ -132,7 +133,7 @@ let aroundTown = function(lat, lon) {
   const clientSecret = "1GDFGDPYK3BYDW4OJJIN12UHHHIR3Y4HHHN3GXOG5RREK4LN";
   // let lat = parseFloat($('.resultsBtn').attr('id-lat'));
   // let lon = parseFloat($('.resultsBtn').attr('id-lon'));
-  let zip = $('.resultsBtn').attr('id_zip');
+  // let zip = $('.resultsBtn').attr('id_zip');
   // let location = $('.resultsBtn').attr('id_location');
   let queryURL = `https://api.foursquare.com/v2/venues/explore?client_id=${clientID}&client_secret=${clientSecret}&v=20190701&near=${location}&zip=${zip}&radius=1000&section=food&section=drinks&section=nightlife&limit=25`;
   
