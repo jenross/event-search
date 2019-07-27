@@ -59,6 +59,9 @@ function makeMarker(venues) {
   let infoWindow = new google.maps.InfoWindow({
     content:venues.content
   });
+  marker.addListener('click', function() {
+    infoWindow.open(map, marker);
+  })
 }
 
 function buildQueryURL() {
