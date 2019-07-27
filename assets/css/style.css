@@ -126,3 +126,8 @@ height: 300px;
 width: 450px;
 margin: 0 auto;
 }
+
+.logoStyle {
+  display: flex;
+  margin-left: 40%;
+  padding-bottom: 31px;
