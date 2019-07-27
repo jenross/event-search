@@ -49,7 +49,11 @@ function initMap(lat, lon) {
     center: location,
     zoom: 8
   });
-  
+  makeMarker(location);
+}
+
+function makeMarker(coord) {
+  var marker = new google.maps.Marker({position: coord, map: map});
 }
 
 function buildQueryURL() {
@@ -139,8 +143,10 @@ let aroundTown = function(lat, lon) {
   }).then(function(results) {
     console.log(results);
     let response = results.response.groups[0].items;
-    console.log('herererer' + response);
+    console.log(response);
   
+    let venues = [];
+
     response.forEach(function(e, i) {
       let venueName = results.response.groups[0].items[i].venue.name;
       let venueLat = parseFloat(results.response.groups[0].items[i].venue.location.lat);
@@ -148,9 +154,7 @@ let aroundTown = function(lat, lon) {
       console.log(venueName);
     });
     console.log('gMaps: ' + lat + ' ' + lon);
-    initMap(lat, lon);
-    let location = {lat: lat, lng: lon};
-    var marker = new google.maps.Marker({position: location, map: map});
+    initMap(lat, lon);    
  });
 }
 
