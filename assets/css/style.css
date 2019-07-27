@@ -169,6 +169,7 @@ body {
   font-size: 15px;
   color: black;
   border-radius: 2%;
+  background-color: #f4f4f4;
 }
 
 .btn-primary:hover {
