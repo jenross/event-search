@@ -43,17 +43,19 @@ let gLat;
 let gLon;
 
 var map;
-function initMap(lat, lon) {
+function initMap(lat, lon, venues) {
   let location = {lat: lat, lng: lon};
   map = new google.maps.Map(document.getElementById('map'), {
     center: location,
-    zoom: 8
+    zoom: 13
   });
-  makeMarker(location);
+  venues.forEach(function(e, i) {
+    makeMarker(venues[i]);
+  })
 }
 
 function makeMarker(coord) {
-  var marker = new google.maps.Marker({position: coord, map: map});
+  var marker = new google.maps.Marker({position: coord.coords, map: map});
 }
 
 function buildQueryURL() {
@@ -152,10 +154,17 @@ let aroundTown = function(lat, lon, zip, location) {
       let venueName = results.response.groups[0].items[i].venue.name;
       let venueLat = parseFloat(results.response.groups[0].items[i].venue.location.lat);
       let venueLng = parseFloat(results.response.groups[0].items[i].venue.location.lng);
-      console.log(venueName);
+      console.log(venueLat);
+
+      let venObject = {
+        coords:{lat:venueLat, lng:venueLng},
+        content:`<h1>${venueName}</h1>`
+      }
+
+      venues.push(venObject);
     });
     console.log('gMaps: ' + lat + ' ' + lon);
-    initMap(lat, lon);    
+    initMap(lat, lon, venues);    
  });
 }
 
