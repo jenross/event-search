@@ -1,11 +1,11 @@
-#S.I.T. (Show in Town)
+<h1>S.I.T. (Show in Town)</h1>
 
-The founders of the S.I.T. application designed it to be a one-stop shop to make your next experience at festival, concert, or club show an effortless one. 
-S.I.T. has serveral different functinality from being able to locate and purchse your tickets to shows either by artists, venue, or cities.
-Furthermore, S.I.T. has several built in features that will help you get ready for the big show day from weather forcast to viewing different recreational activities (resturants, etc.) within the vinicity of the venue.
+<p>The founders of the S.I.T. application designed it to be a one-stop shop to make your next experience at festival, concert, or club show an effortless one.</p>
+<p>S.I.T. has serveral different functinality from being able to locate and purchse your tickets to shows either by artists, venue, or cities.</p>
+<p>Furthermore, S.I.T. has several built in features that will help you get ready for the big show day from weather forcast to viewing different recreational activities (resturants, etc.) within the vinicity of the venue.</p>
 
 
-##**Prerequisites:**
+**Prerequisites:**<
 * Project Goal:
   * Build Something Awesome
 * Requirements:
@@ -19,5 +19,8 @@ Furthermore, S.I.T. has several built in features that will help you get ready f
    * Must use Bootstrap or Alternative CSS Framework
    * Must be Deployed (GitHub Pages or Firebase)
    * Must have User Input Validation
-```APIs Used: SeatGeek, FourSquare, & AccuWeather
-Library Used: Bideo```
+
+```
+APIs Used: SeatGeek, FourSquare, & AccuWeather
+Library Used: Bideo
+```
