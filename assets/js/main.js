@@ -38,6 +38,10 @@
   });
 }());
 
+let gZip;
+let gLat;
+let gLon;
+
 var map;
 function initMap(lat, lon) {
   let location = {lat: lat, lng: lon};
@@ -106,9 +110,10 @@ $(document).on('click', '.resultsBtn', function() {
   $('#results-box').show();
   $('#search-bar').hide();
   $('#event-table').hide();
-  let lat = parseFloat($(this).attr('id-lat'));
-  let lon = parseFloat($(this).attr('id-lon'));
-  aroundTown(lat, lon);
+  gZip = $(this).attr('id_zip');
+  gLat = parseFloat($(this).attr('id-lat'));
+  gLon = parseFloat($(this).attr('id-lon'));
+  aroundTown(gLat, gLon);
 });
 
 // Results Page Town Tab
@@ -154,7 +159,8 @@ $(document).on('click', '#townBtn', function() {
 // Results Page Weather Tab
 $(document).on('click', '#weatherBtn', function() {
   
-  let location = $('#resultsBtn').attr('id_zip');
+  let location = gZip;
+  console.log('location: ' + location);
 
   $('#weather-table').show();
   $('#results').empty();
