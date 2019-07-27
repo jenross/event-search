@@ -49,7 +49,7 @@ function initMap(lat, lon) {
     center: location,
     zoom: 8
   });
-  // makeMarker(location);
+  makeMarker(location);
 }
 
 function makeMarker(coord) {
