@@ -66,28 +66,60 @@
         <div class="col-sm-12">
           <br />
           <div class="card customTable">
-            <div class="card-header">
-              <b
-                ><p class="title"><i class="table-header"></i> Top Events</p></b
-              >
+            <!-- <div class="card-header"> -->
+            <div class="row" id="search-bar">
+              <div class="col-sm-12">
+                <form role="form">
+                  <div class="logoStyle">
+                    <img
+                      src="./assets/images/logo.png"
+                      width="35%"
+                      height="35%"
+                    />
+                  </div>
+
+                  <div class="form-group text-white">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="search-term"
+                      placeholder="Search by artist, team, city or venue"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    class="btn btn-default text-white"
+                    id="run-search"
+                  >
+                    Search
+                  </button>
+                </form>
+
+                <b
+                  ><p class="title">
+                    <i class="table-header"></i> Top Events
+                  </p></b
+                >
+              </div>
+              <table class="table table-hover table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">Upcoming Shows:</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">City, State</th>
+                    <th scope="col">Venue</th>
+                    <th scope="col">Tickets:</th>
+                  </tr>
+                </thead>
+                <tbody id="event-tbody"></tbody>
+              </table>
+              <!-- <div class="card-body table-dark" id="event-section"></div> -->
             </div>
-            <table class="table table-hover table-dark">
-              <thead>
-                <tr>
-                  <th scope="col">Upcoming Shows:</th>
-                  <th scope="col">Date</th>
-                  <th scope="col">City, State</th>
-                  <th scope="col">Venue</th>
-                  <th scope="col">Tickets:</th>
-                </tr>
-              </thead>
-              <tbody id="event-tbody"></tbody>
-            </table>
-            <!-- <div class="card-body table-dark" id="event-section"></div> -->
           </div>
+          <!-- </div> -->
         </div>
       </div>
-
       <div class="row" id="results-box">
         <div class="col-sm-12">
           <div class="card text-center">
