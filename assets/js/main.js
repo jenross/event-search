@@ -49,7 +49,7 @@ function initMap(lat, lon) {
     center: location,
     zoom: 8
   });
-  var marker = new google.maps.Marker({position: location, map: map});
+  
 }
 
 function buildQueryURL() {
@@ -129,7 +129,7 @@ let aroundTown = function(lat, lon) {
   // let lat = parseFloat($('.resultsBtn').attr('id-lat'));
   // let lon = parseFloat($('.resultsBtn').attr('id-lon'));
   let zip = $('.resultsBtn').attr('id_zip');
-  let location = $('.resultsBtn').attr('id_location');
+  // let location = $('.resultsBtn').attr('id_location');
   let queryURL = `https://api.foursquare.com/v2/venues/explore?client_id=${clientID}&client_secret=${clientSecret}&v=20190701&near=${location}&zip=${zip}&radius=1000&section=food&section=drinks&section=nightlife&limit=25`;
   
   console.log(queryURL);
@@ -149,6 +149,8 @@ let aroundTown = function(lat, lon) {
     });
     console.log('gMaps: ' + lat + ' ' + lon);
     initMap(lat, lon);
+    let location = {lat: lat, lng: lon};
+    var marker = new google.maps.Marker({position: location, map: map});
  });
 }
 
