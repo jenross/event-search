@@ -86,7 +86,7 @@ $("#run-search").on("click", function(event) {
           let venue = $(`<td class='event-data'> ${response.events[i].venue.name} </td>`);
           let lat = parseFloat(response.events[i].venue.location.lat);
           let lon = parseFloat(response.events[i].venue.location.lon);
-          let moreInfo = $(`<td><a class="btn btn-primary" id='resultsBtn' type="button" href='#' role="button" id_zip='${response.events[i].venue.postal_code}' id_location='${response.events[i].venue.display_location}' id-lat='${lat}' id-lon='${lon}'>More info</a></td>`);
+          let moreInfo = $(`<td><a class="btn btn-primary resultsBtn" type="button" href='#' role="button" id_zip='${response.events[i].venue.postal_code}' id_location='${response.events[i].venue.display_location}' id-lat='${lat}' id-lon='${lon}'>More info</a></td>`);
           console.log(lat + ' ' + lon);
           let results = $('<ul>').addClass('each-event d-flex flex-row justify-content-around'); 
           results.append(title, convertedDate, location, venue, moreInfo);
@@ -102,15 +102,17 @@ $("#run-search").on("click", function(event) {
 });
 
 // Events Page More Info Button
-$(document).on('click', '#resultsBtn', function() {
+$(document).on('click', '.resultsBtn', function() {
   $('#results-box').show();
   $('#search-bar').hide();
   $('#event-table').hide();
-  aroundTown();
+  let lat = parseFloat($(this).attr('id-lat'));
+  let lon = parseFloat($(this).attr('id-lon'));
+  aroundTown(lat, lon);
 });
 
 // Results Page Town Tab
-let aroundTown = function() {
+let aroundTown = function(lat, lon) {
   $('#map').show();
   $('#weather-table').hide();
   $('#townBtn').attr('class', 'nav-link active');
@@ -119,10 +121,10 @@ let aroundTown = function() {
 
   const clientID = "LMTVE3CNXEET1N3OERSA0SYN0WK0WVXIAWKKB4R4FZ5APF1A";
   const clientSecret = "1GDFGDPYK3BYDW4OJJIN12UHHHIR3Y4HHHN3GXOG5RREK4LN";
-  let lat = parseFloat($('#resultsBtn').attr('id-lat'));
-  let lon = parseFloat($('#resultsBtn').attr('id-lon'));
-  let zip = $('#resultsBtn').attr('id_zip');
-  let location = $('#resultsBtn').attr('id_location');
+  // let lat = parseFloat($('.resultsBtn').attr('id-lat'));
+  // let lon = parseFloat($('.resultsBtn').attr('id-lon'));
+  let zip = $('.resultsBtn').attr('id_zip');
+  let location = $('.resultsBtn').attr('id_location');
   let queryURL = `https://api.foursquare.com/v2/venues/explore?client_id=${clientID}&client_secret=${clientSecret}&v=20190701&near=${location}&zip=${zip}&radius=1000&section=food&section=drinks&section=nightlife&limit=25`;
   
   console.log(queryURL);
