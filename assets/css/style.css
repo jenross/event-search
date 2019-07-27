@@ -176,3 +176,7 @@ body {
   background: black;
   color: rgb(0, 135, 252);
 }
+
+#run-search {
+  margin-left: 37%;
+}
