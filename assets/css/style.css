@@ -159,3 +159,19 @@ body {
 #customSearchTop {
   padding-top: 927px;
 }
+
+.btn-primary {
+  width: 100px;
+  height: 40px;
+  border: none;
+  border: solid 2px black;
+  border-radius: 5px;
+  font-size: 15px;
+  color: black;
+  border-radius: 2%;
+}
+
+.btn-primary:hover {
+  background: black;
+  color: rgb(0, 135, 252);
+}
