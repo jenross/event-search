@@ -40,10 +40,12 @@
 
 var map;
 function initMap(lat, lon) {
+  let location = {lat: lat, lng: lon};
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: lat, lng: lon},
+    center: location,
     zoom: 8
   });
+  var marker = new google.maps.Marker({position: location, map: map});
 }
 
 function buildQueryURL() {
@@ -82,8 +84,8 @@ $("#run-search").on("click", function(event) {
           let convertedDate = $(`<td class='event-data'> ${m.format('ll')} </td>`);
           let location = $(`<td class='event-data local' id='${response.events[i].venue.postal_code}'>${response.events[i].venue.display_location}</td>`);
           let venue = $(`<td class='event-data'> ${response.events[i].venue.name} </td>`);
-          let lat = response.events[i].venue.location.lat;
-          let lon = response.events[i].venue.location.lon;
+          let lat = parseFloat(response.events[i].venue.location.lat);
+          let lon = parseFloat(response.events[i].venue.location.lon);
           let moreInfo = $(`<td><a class="btn btn-primary" id='resultsBtn' type="button" href='#' role="button" id_zip='${response.events[i].venue.postal_code}' id_location='${response.events[i].venue.display_location}' id-lat='${lat}' id-lon='${lon}'>More info</a></td>`);
           console.log(lat + ' ' + lon);
           let results = $('<ul>').addClass('each-event d-flex flex-row justify-content-around'); 
