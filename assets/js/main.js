@@ -54,8 +54,11 @@ function initMap(lat, lon, venues) {
   })
 }
 
-function makeMarker(coord) {
-  var marker = new google.maps.Marker({position: coord.coords, map: map});
+function makeMarker(venues) {
+  var marker = new google.maps.Marker({position: venues.coords, map: map});
+  let infoWindow = new google.maps.InfoWindow({
+    content:venues.content
+  });
 }
 
 function buildQueryURL() {
