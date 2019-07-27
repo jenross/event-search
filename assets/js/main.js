@@ -153,7 +153,7 @@ let aroundTown = function(lat, lon) {
 }
 
 $(document).on('click', '#townBtn', function() {
-  aroundTown();
+  aroundTown(gLat, gLon);
 });
 
 // Results Page Weather Tab
