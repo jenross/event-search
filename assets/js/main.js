@@ -91,6 +91,7 @@ function clear() {
 // Start Page Search Button 
 $("#run-search").on("click", function(event) {
   event.preventDefault();
+  $('#logo-link').show();
   $('#search-bar').hide();
   clear();
   let queryURL = buildQueryURL();
@@ -288,3 +289,10 @@ function ticketsBtn() {
   $('#map').hide();
   $('#weather-table').hide();
 }
+
+$(document).on('click', '#logo-link', function() {
+  $('#search-bar').show();
+  $('#results-box').hide();
+  $('#event-table').hide();
+  $('#logo-link').hide();
+});

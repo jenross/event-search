@@ -180,3 +180,15 @@ body {
 #run-search {
   margin-left: 37%;
 }
+
+.logo-link {
+  position: absolute;
+  left: 0;
+  top: 20px;
+  display: none;
+  
+}
+
+.logo-link:hover {
+  cursor: pointer;
+}
