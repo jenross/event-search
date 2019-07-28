@@ -41,6 +41,8 @@
 let gZip;
 let gLat;
 let gLon;
+let gLocation;
+let venueName;
 
 var map;
 function initMap(lat, lon, venues) {
@@ -102,7 +104,11 @@ $("#run-search").on("click", function(event) {
           let venue = $(`<td class='event-data'> ${response.events[i].venue.name} </td>`);
           let lat = parseFloat(response.events[i].venue.location.lat);
           let lon = parseFloat(response.events[i].venue.location.lon);
-          let moreInfo = $(`<td><a class="btn btn-primary resultsBtn" type="button" href='#' role="button" id_zip='${response.events[i].venue.postal_code}' id_location='${response.events[i].venue.display_location}' id-lat='${lat}' id-lon='${lon}'>More info</a></td>`);
+          let moreInfo = $(`<td><a class="btn btn-primary resultsBtn" 
+                              type="button" href='#' role="button" 
+                              id-venue='${response.events[i].venue.name}' id_zip='${response.events[i].venue.postal_code}' 
+                              id_location='${response.events[i].venue.display_location}' 
+                              id-lat='${lat}' id-lon='${lon}'>More info</a></td>`);
           console.log(lat + ' ' + lon);
           let results = $('<ul>').addClass('each-event d-flex flex-row justify-content-around'); 
           results.append(title, convertedDate, location, venue, moreInfo);
@@ -126,11 +132,15 @@ $(document).on('click', '.resultsBtn', function() {
   gLat = parseFloat($(this).attr('id-lat'));
   gLon = parseFloat($(this).attr('id-lon'));
   gLocation = $(this).attr('id_location');
-  aroundTown(gLat, gLon, gZip, gLocation);
+  venueName = $(this).attr('id-venue');
+  aroundTown(gLat, gLon, gZip, gLocation, venueName);
 });
 
 // Results Page Town Tab
-let aroundTown = function(lat, lon, zip, location) {
+let aroundTown = function(lat, lon, zip, location, venueName) {
+  $('#result-title').text(`Places to Eat Around ${venueName}`);
+  $('#results').text(`Click on the markers to see restaurants in ${location}`);
+  $('#goBtn').hide();
   $('#map').show();
   $('#weather-table').hide();
   $('#townBtn').attr('class', 'nav-link active');
@@ -164,7 +174,7 @@ let aroundTown = function(lat, lon, zip, location) {
 
       let venObject = {
         coords:{lat:venueLat, lng:venueLng},
-        content:`<h1>${venueName}</h1>`
+        content:`<p>${venueName}</p>`
       }
 
       venues.push(venObject);
@@ -175,7 +185,7 @@ let aroundTown = function(lat, lon, zip, location) {
 }
 
 $(document).on('click', '#townBtn', function() {
-  aroundTown(gLat, gLon);
+  aroundTown(gLat, gLon, gZip, gLocation, venueName);
 });
 
 // Results Page Weather Tab
