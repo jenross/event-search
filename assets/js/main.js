@@ -51,11 +51,11 @@ var map;
 let eventLink;
 
 // Google Maps Initializer
-function initMap(lat, lon, venues) {
-  let location = {lat: lat, lng: lon};
+function initMap(venue0, venues) {
+  let location = venue0;
   map = new google.maps.Map(document.getElementById('map'), {
     center: location,
-    zoom: 13
+    zoom: 15
   });
   venues.forEach(function(e, i) {
     makeMarker(venues[i]);
@@ -73,6 +73,7 @@ function makeMarker(venues) {
   })
 }
 
+// Constructs SeatGeek URL 
 function buildQueryURL() {
   let search = $('#search-term').val().trim(); 
   const APIKEY = 'MTUwOTcwMjd8MTU2MzQ2MzA4Ny42OQ';
@@ -82,6 +83,7 @@ function buildQueryURL() {
   return initialQueryURL;
 };
 
+// Clears Search Results
 function clear() {
   $("#event-section").empty();
 };
@@ -153,7 +155,7 @@ $(document).on('click', '.resultsBtn', function() {
 });
 
 // Results Page Town Tab
-let aroundTown = function(lat, lon, zip, location, venueName) {
+function aroundTown(lat, lon, zip, location, venueName) {
   $('#result-title').text(`Places to Eat Around ${venueName}`);
   $('#results').text(`Click on the markers to see restaurants in ${location}`);
   $('#goBtn').hide();
@@ -197,10 +199,11 @@ let aroundTown = function(lat, lon, zip, location, venueName) {
       venues.push(venObject);
     });
     console.log('gMaps: ' + lat + ' ' + lon);
-    initMap(lat, lon, venues);    
+    initMap(venues[0].coords, venues);    
  });
 }
 
+// Town Button Listener
 $(document).on('click', '#townBtn', function() {
   aroundTown(gLat, gLon, gZip, gLocation, venueName);
 });
@@ -216,6 +219,8 @@ $(document).on('click', '#weatherBtn', function() {
   $('#map').hide();
   $('#insert-table').html('');
   $('#goBtn').hide();
+  $('#weather-table').show();
+  $('#extraBtn').hide();
 
   // Change active tab
   $('#weatherBtn').attr('class', 'nav-link active');
@@ -240,8 +245,7 @@ $(document).on('click', '#weatherBtn', function() {
     }).then(function(response) {
       console.log(response);
       let results = response.DailyForecasts;
-      $('#weather-table').show();
-      $('#extraBtn').hide();
+      
       results.forEach(element => {
         let forecast = element.Day.Icon;
         let day = moment(element.Date, 'YYYY-MM-DDThh:mm:ss').format('ll');
@@ -264,10 +268,12 @@ $(document).on('click', '#weatherBtn', function() {
   });
 });
 
+// Results Page Tickets Tab
 $(document).on('click', '#ticketsBtn', function() {
   ticketsBtn();
 });
  
+// Tickets Page 
 function ticketsBtn() {
   $('#goBtn').attr('href', eventLink);
   $('#goBtn').attr('target', '_blank');
