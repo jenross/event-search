@@ -153,7 +153,8 @@ body {
 .customTable {
   background-color: rgba(0, 0, 0, 0.5);
   padding: inherit;
-  padding: 0%;
+  padding: 0;
+  margin: 20px;
 }
 
 #customSearchTop {
@@ -191,4 +192,29 @@ body {
 
 .logo-link:hover {
   cursor: pointer;
+}
+
+#event-table {
+  max-width: 768px;
+  margin: 0 auto;
+}
+
+.table-header {
+  padding-left: 10px;
+}
+
+.card-title,
+.card-text,
+.card-text2,
+.nav-link {
+  color: #f4f4f4;
+}
+
+.nav-link:hover {
+  background-color: #fff;
+  color: #495057;
+}
+
+.card-header-tabs {
+  opacity: 0.777;
 }

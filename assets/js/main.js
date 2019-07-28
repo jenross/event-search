@@ -49,6 +49,7 @@ let eventName;
 let eventDate;
 var map;
 let eventLink;
+let gotWeather = 0;
 
 // Google Maps Initializer
 function initMap(venue0, venues) {
@@ -222,7 +223,6 @@ $(document).on('click', '#weatherBtn', function() {
   $('#weather-table').show();
   $('#results').empty();
   $('#map').hide();
-  $('#insert-table').html('');
   $('#goBtn').hide();
   $('#weather-table').show();
   $('#extraBtn').hide();
@@ -234,44 +234,57 @@ $(document).on('click', '#weatherBtn', function() {
 
   let locationQuery = `https://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=JmVIFm5N5S9A6D5BnIBp0ah5tVJIg9GA&q=${location}`;
   
-  $.ajax({
-    url: locationQuery,
-    method: 'GET',
-  }).then(function(response) {
-    let locationCode = response[0].Key;
-    let local = response[0].EnglishName + ' ' + response[0].AdministrativeArea.LocalizedName;
-    $('#result-title').text('Local Weather for ' + local);
-    console.log(locationCode);
-    let query = `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationCode}?apikey=JmVIFm5N5S9A6D5BnIBp0ah5tVJIg9GA&details=true`;
-    console.log(query);
+  getWeather(locationQuery);
+
+});
+
+function getWeather(locationQuery) {
+  if (gotWeather === 0) {
     $.ajax({
-      url: query,
+      url: locationQuery,
       method: 'GET',
     }).then(function(response) {
-      console.log(response);
-      let results = response.DailyForecasts;
-      
-      results.forEach(element => {
-        let forecast = element.Day.Icon;
-        let day = moment(element.Date, 'YYYY-MM-DDThh:mm:ss').format('ll');
-        let temp = element.Temperature.Minimum.Value + '/' + element.Temperature.Maximum.Value;
-        let rain = element.Day.RainProbability + '%';
-        let sun = moment(element.Sun.Rise, 'YYYY-MM-DDThh:mm:ss').format('h:mm') + ' AM/' +  moment(element.Sun.Set, 'YYYY-MM-DDThh:mm:ss').format('h:mm') + ' PM';
-
-        let table = `
-          <tr>
-            <td>${day}</td>
-            <td><img src='assets/images/${forecast}-s.png'></td>
-            <td>${temp} °F</td>
-            <td>${rain}</td>
-            <td>${sun}</td>
-          </tr>
-        `
-        $('#insert-table').append(table);
+      let locationCode = response[0].Key;
+      let local = response[0].EnglishName + ' ' + response[0].AdministrativeArea.LocalizedName;
+      $('#result-title').text('Local Weather for ' + local);
+      console.log(locationCode);
+      let awKey1 = `vJvpSEzy3aG3nRuNhrMeVnhBeDSj7JFK`;
+      let awkey2 = `JmVIFm5N5S9A6D5BnIBp0ah5tVJIg9GA`;
+      let awKey3 = `cNJ6YSXkDrtUrElsVG1kMQMvLrFK4xAg`;
+      let query = `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationCode}?apikey=${awKey3}&details=true`;
+      console.log(query);
+      $.ajax({
+        url: query,
+        method: 'GET',
+      }).then(function(response) {
+        console.log(response);
+        let results = response.DailyForecasts;
+        
+        results.forEach(element => {
+          let forecast = element.Day.Icon;
+          let day = moment(element.Date, 'YYYY-MM-DDThh:mm:ss').format('ll');
+          let temp = element.Temperature.Minimum.Value + '/' + element.Temperature.Maximum.Value;
+          let rain = element.Day.RainProbability + '%';
+          let sun = moment(element.Sun.Rise, 'YYYY-MM-DDThh:mm:ss').format('h:mm') + ' AM/' +  moment(element.Sun.Set, 'YYYY-MM-DDThh:mm:ss').format('h:mm') + ' PM';
+  
+          let table = `
+            <tr>
+              <td>${day}</td>
+              <td><img src='assets/images/${forecast}-s.png'></td>
+              <td>${temp} °F</td>
+              <td>${rain}</td>
+              <td>${sun}</td>
+            </tr>
+          `
+          $('#insert-table').append(table);
+        });
       });
     });
-  });
-});
+    gotWeather = 1;
+  } else {
+    $('#weather-table').show();
+  }
+}
 
 // Results Page Tickets Tab
 $(document).on('click', '#ticketsBtn', function() {
@@ -284,7 +297,7 @@ function ticketsBtn() {
   $('#goBtn').attr('target', '_blank');
   $('#goBtn').show();
   $('#result-title').text(`Buy Tickets to ${eventName}`);
-  $('#results').attr('class', '');
+  $('#results').attr('class', 'card-text2');
   $('#results').text(`Being held at the ${venueName} on ${eventDate} in ${gLocation}.`);
   // Change active tab
   $('#ticketsBtn').attr('class', 'nav-link active');
