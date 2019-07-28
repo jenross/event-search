@@ -1,3 +1,4 @@
+// Bideo Function
 (function () {
 
   var bv = new Bideo();
@@ -38,13 +39,18 @@
   });
 }());
 
+// Global Variables
 let gZip;
 let gLat;
 let gLon;
 let gLocation;
 let venueName;
-
+let eventName;
+let eventDate;
 var map;
+let eventLink;
+
+// Google Maps Initializer
 function initMap(lat, lon, venues) {
   let location = {lat: lat, lng: lon};
   map = new google.maps.Map(document.getElementById('map'), {
@@ -56,6 +62,7 @@ function initMap(lat, lon, venues) {
   })
 }
 
+// gMaps Marker Creation
 function makeMarker(venues) {
   var marker = new google.maps.Marker({position: venues.coords, map: map});
   let infoWindow = new google.maps.InfoWindow({
@@ -96,31 +103,37 @@ $("#run-search").on("click", function(event) {
       let title;
       for (let i = 0; i < events; i++) {
         var tr = $('<tr>');
-          title = $(`<td class='event-data'>${response.events[i].title}</td>`);
-          let initialDate = response.events[i].datetime_local;
-          let m = moment(initialDate, 'YYYY-MM-DDThh:mm:ss');
-          let convertedDate = $(`<td class='event-data'> ${m.format('ll')} </td>`);
-          let location = $(`<td class='event-data local' id='${response.events[i].venue.postal_code}'>${response.events[i].venue.display_location}</td>`);
-          let venue = $(`<td class='event-data'> ${response.events[i].venue.name} </td>`);
-          let lat = parseFloat(response.events[i].venue.location.lat);
-          let lon = parseFloat(response.events[i].venue.location.lon);
-          let moreInfo = $(`<td><a class="btn btn-primary resultsBtn" 
-                              type="button" href='#' role="button" 
-                              id-venue='${response.events[i].venue.name}' id_zip='${response.events[i].venue.postal_code}' 
-                              id_location='${response.events[i].venue.display_location}' 
-                              id-lat='${lat}' id-lon='${lon}'>More info</a></td>`);
-          console.log(lat + ' ' + lon);
-          let results = $('<ul>').addClass('each-event d-flex flex-row justify-content-around'); 
-          results.append(title, convertedDate, location, venue, moreInfo);
-          $(tr).append(title);
-          $(tr).append(convertedDate);
-          $(tr).append(location);
-          $(tr).append(venue);
-          $(tr).append(moreInfo);
-          $('#event-tbody').append(tr);
-        }
+        title = $(`<td class='event-data'>${response.events[i].title}</td>`);
+        let initialDate = response.events[i].datetime_local;
+        let m = moment(initialDate, 'YYYY-MM-DDThh:mm:ss');
+        let convertedDate = $(`<td class='event-data'> ${m.format('ll')} </td>`);
+        let location = $(`<td class='event-data local' id='${response.events[i].venue.postal_code}'>${response.events[i].venue.display_location}</td>`);
+        let venue = $(`<td class='event-data'> ${response.events[i].venue.name} </td>`);
+        let lat = parseFloat(response.events[i].venue.location.lat);
+        let lon = parseFloat(response.events[i].venue.location.lon);
+        
+        let moreInfo = $(`<td><a class="btn btn-primary resultsBtn" 
+                            type="button" href='#' role="button" 
+                            id-venue='${response.events[i].venue.name}' 
+                            id_zip='${response.events[i].venue.postal_code}' 
+                            id_location='${response.events[i].venue.display_location}' 
+                            id-lat='${lat}' id-lon='${lon}'
+                            id-eventName='${response.events[i].title}'
+                            id-date='${m.format('ll')}'
+                            id-link='${response.events[i].url}'
+                            >More info</a></td>`);
 
-      });
+        console.log(lat + ' ' + lon);
+        let results = $('<ul>').addClass('each-event d-flex flex-row justify-content-around'); 
+        results.append(title, convertedDate, location, venue, moreInfo);
+        $(tr).append(title);
+        $(tr).append(convertedDate);
+        $(tr).append(location);
+        $(tr).append(venue);
+        $(tr).append(moreInfo);
+        $('#event-tbody').append(tr);
+        }
+  });
 });
 
 // Events Page More Info Button
@@ -133,6 +146,9 @@ $(document).on('click', '.resultsBtn', function() {
   gLon = parseFloat($(this).attr('id-lon'));
   gLocation = $(this).attr('id_location');
   venueName = $(this).attr('id-venue');
+  eventName = $(this).attr('id-eventName');
+  eventDate = $(this).attr('id-date');
+  eventLink = $(this).attr('id-link');
   aroundTown(gLat, gLon, gZip, gLocation, venueName);
 });
 
@@ -145,6 +161,7 @@ let aroundTown = function(lat, lon, zip, location, venueName) {
   $('#weather-table').hide();
   $('#townBtn').attr('class', 'nav-link active');
   $('#weatherBtn').attr('class', 'nav-link');
+  $('#ticketsBtn').attr('class', 'nav-link');
   // $('#weather-table').empty();
 
   const clientID = "LMTVE3CNXEET1N3OERSA0SYN0WK0WVXIAWKKB4R4FZ5APF1A";
@@ -203,6 +220,7 @@ $(document).on('click', '#weatherBtn', function() {
   // Change active tab
   $('#weatherBtn').attr('class', 'nav-link active');
   $('#townBtn').attr('class', 'nav-link');
+  $('#ticketsBtn').attr('class', 'nav-link');
 
   let locationQuery = `https://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=JmVIFm5N5S9A6D5BnIBp0ah5tVJIg9GA&q=${location}`;
   
@@ -246,5 +264,21 @@ $(document).on('click', '#weatherBtn', function() {
   });
 });
 
-
+$(document).on('click', '#ticketsBtn', function() {
+  ticketsBtn();
+});
  
+function ticketsBtn() {
+  $('#goBtn').attr('href', eventLink);
+  $('#goBtn').attr('target', '_blank');
+  $('#goBtn').show();
+  $('#result-title').text(`Buy Tickets to ${eventName}`);
+  $('#results').attr('class', '');
+  $('#results').text(`Being held at the ${venueName} on ${eventDate} in ${gLocation}.`);
+  // Change active tab
+  $('#ticketsBtn').attr('class', 'nav-link active');
+  $('#weatherBtn').attr('class', 'nav-link');
+  $('#townBtn').attr('class', 'nav-link');
+  $('#map').hide();
+  $('#weather-table').hide();
+}
