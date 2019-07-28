@@ -80,6 +80,7 @@ function buildQueryURL() {
   let initialQueryURL = `https://api.seatgeek.com/2/events?q=${search}&client_id=${APIKEY}`;
 
   console.log(initialQueryURL);
+  $('#search-term').val('');
   return initialQueryURL;
 };
 
@@ -93,6 +94,8 @@ $("#run-search").on("click", function(event) {
   event.preventDefault();
   $('#logo-link').show();
   $('#search-bar').hide();
+  
+  
   clear();
   let queryURL = buildQueryURL();
   $.ajax({
@@ -137,6 +140,7 @@ $("#run-search").on("click", function(event) {
         $('#event-tbody').append(tr);
         }
   });
+  
 });
 
 // Events Page More Info Button
