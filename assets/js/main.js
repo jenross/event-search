@@ -79,7 +79,7 @@ function makeMarker(venues) {
 function buildQueryURL() {
   let search = $('#search-term').val().trim(); 
   const APIKEY = 'MTUwOTcwMjd8MTU2MzQ2MzA4Ny42OQ';
-  let initialQueryURL = `https://api.seatgeek.com/2/events?q=${search}&client_id=${APIKEY}`;
+  let initialQueryURL = `https://api.seatgeek.com/2/events?q=${search}&client_id=${APIKEY}&per_page=5`;
 
   console.log(initialQueryURL);
   $('#search-term').val('');
@@ -88,7 +88,7 @@ function buildQueryURL() {
 
 // Clears Search Results
 function clear() {
-  $("#event-section").empty();
+  $("#event-tbody").empty();
 };
 
 // Start Page Search Button 
@@ -96,8 +96,6 @@ $("#run-search").on("click", function(event) {
   event.preventDefault();
   $('#logo-link').show();
   $('#search-bar').hide();
-  
-  
   clear();
   let queryURL = buildQueryURL();
   $.ajax({
