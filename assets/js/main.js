@@ -50,6 +50,7 @@ let eventDate;
 var map;
 let eventLink;
 let gotWeather = 0;
+let local;
 
 // Google Maps Initializer
 function initMap(venue0, venues) {
@@ -219,20 +220,24 @@ $(document).on('click', '#weatherBtn', function() {
   
   let location = gZip;
   console.log('location: ' + location);
-
+  $('#result-title').text();
   $('#weather-table').show();
   $('#results').empty();
   $('#map').hide();
   $('#goBtn').hide();
   $('#weather-table').show();
   $('#extraBtn').hide();
+  $('#result-title').text('Local Weather for ' + local);
 
   // Change active tab
   $('#weatherBtn').attr('class', 'nav-link active');
   $('#townBtn').attr('class', 'nav-link');
   $('#ticketsBtn').attr('class', 'nav-link');
 
-  let locationQuery = `https://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=JmVIFm5N5S9A6D5BnIBp0ah5tVJIg9GA&q=${location}`;
+  let awKey1 = `vJvpSEzy3aG3nRuNhrMeVnhBeDSj7JFK`;
+  let awkey2 = `JmVIFm5N5S9A6D5BnIBp0ah5tVJIg9GA`;
+  let awKey3 = `cNJ6YSXkDrtUrElsVG1kMQMvLrFK4xAg`;
+  let locationQuery = `https://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=${awKey3}&q=${location}`;
   
   getWeather(locationQuery);
 
@@ -240,24 +245,26 @@ $(document).on('click', '#weatherBtn', function() {
 
 function getWeather(locationQuery) {
   if (gotWeather === 0) {
+
+    // Call to AccuWeather Location API
     $.ajax({
       url: locationQuery,
       method: 'GET',
     }).then(function(response) {
       let locationCode = response[0].Key;
-      let local = response[0].EnglishName + ' ' + response[0].AdministrativeArea.LocalizedName;
+      local = response[0].EnglishName + ' ' + response[0].AdministrativeArea.LocalizedName;
       $('#result-title').text('Local Weather for ' + local);
       console.log(locationCode);
-      let awKey1 = `vJvpSEzy3aG3nRuNhrMeVnhBeDSj7JFK`;
-      let awkey2 = `JmVIFm5N5S9A6D5BnIBp0ah5tVJIg9GA`;
-      let awKey3 = `cNJ6YSXkDrtUrElsVG1kMQMvLrFK4xAg`;
-      let query = `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationCode}?apikey=${awKey3}&details=true`;
+      
+      let query = `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationCode}?apikey=cNJ6YSXkDrtUrElsVG1kMQMvLrFK4xAg&details=true`;
       console.log(query);
+
+      // Call to AccuWeather Forecast API
       $.ajax({
         url: query,
         method: 'GET',
       }).then(function(response) {
-        console.log(response);
+        
         let results = response.DailyForecasts;
         
         results.forEach(element => {
@@ -312,4 +319,8 @@ $(document).on('click', '#logo-link', function() {
   $('#results-box').hide();
   $('#event-table').hide();
   $('#logo-link').hide();
+  $('#insert-table').empty();
+  $('#result-title').empty();
+  $('#results').empty();
+  gotWeather = 0;
 });
