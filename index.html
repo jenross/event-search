@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Concertcation</title>
+  <title>Shows in Town</title>
 
   <link
     rel="stylesheet"
@@ -13,7 +13,7 @@
     crossorigin="anonymous"
   />
   <link rel="stylesheet" href="assets/css/style.css" />
-
+  <link rel="icon" href="assets/images/logo_Project1_gray.png" type="image/png">
   <script src="https://use.typekit.net/nlq1kdt.js"></script>
   <script>
     try {
@@ -25,7 +25,7 @@
 <body class="d-flex flex-column h-100">
 
   <!-- Bideo Container -->
-  <div class="container flex-shrink-0">
+  <div class="container">
 
     <!-- Bideo Controls -->
     <div id="video_controls">
@@ -54,14 +54,14 @@
   </div><!-- End Bideo Container -->
   
   <!-- Main Container -->
-  <div class="container">
+  <div class="main-container flex-shrink-0">
 
     <!-- First Scene - Search Bar -->
     <div class="row" id="search-bar">
       <div class="col-md-12">
         <form role="form">
           
-          <div class="logoStyle">
+          <div class="d-flex text-center logoStyle">
             <img src="./assets/images/logo.png" width="35%" height="35%" />
           </div>
           
@@ -70,17 +70,18 @@
               type="text"
               class="form-control"
               id="search-term"
-              placeholder="Search by artist, team, city or venue"
+              placeholder="Search for an artist, team, city or venue"
+              required
             />
           </div>
           
           <button
             type="submit"
-            class="btn btn-default text-white"
+            class="btn btn-default text-white d-flex text-center"
             id="run-search"
           >Search
           </button>
-
+          
         </form>
       </div>
     </div><!-- End of First Scene -->
@@ -93,11 +94,11 @@
           <table class="table table-hover table-dark">
             <thead>
               <tr>
-                <th scope="col">Upcoming Shows:</th>
+                <th scope="col">Upcoming Shows</th>
                 <th scope="col">Date</th>
                 <th scope="col">City, State</th>
                 <th scope="col">Venue</th>
-                <th scope="col">Tickets:</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody id="event-tbody"></tbody>

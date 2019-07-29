@@ -108,21 +108,20 @@ body {
   opacity: 0.777;
 }
 
-.footer,
-.push {
-  height: 50px;
+.footer {
+  /* height: 50px; */
   text-align: center;
   width: 100%;
-  margin: 0 auto;
-  clear: both;
+  /* margin: 0 auto; */
+  /* clear: both; */
   color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
-  margin: 10px;
+  /* margin: 10px; */
   font-size: 13px;
 }
 
 #footer {
-  position: fixed;
+  position:fixed;
   bottom: 0;
   left: 0;
   right: 0;
@@ -145,8 +144,8 @@ body {
 }
 
 .logoStyle {
-  display: flex;
-  margin-left: 40%;
+  /* display: flex; */
+  margin-left: 38%;
   padding-bottom: 31px;
 }
 
@@ -218,3 +217,4 @@ body {
 .card-header-tabs {
   opacity: 0.777;
 }
+
