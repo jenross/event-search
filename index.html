@@ -25,7 +25,7 @@
 <body class="d-flex flex-column h-100">
 
   <!-- Bideo Container -->
-  <div class="container">
+  <div class="container flex-shrink-0">
 
     <!-- Bideo Controls -->
     <div id="video_controls">
@@ -40,9 +40,8 @@
     <!-- Bideo Components -->
     <video id="background_video" loop muted></video>
     <div id="video_cover"></div>
-    <div id="overlay"></div>
-
-    <!-- Big Logo -->
+    <div id="overlay">
+      <!-- Big Logo -->
     <div class="row">
       <div class="col-sm-12">
           <div class="logo-link" id="logo-link">
@@ -50,11 +49,10 @@
           </div>
       </div>
     </div>
-
-  </div><!-- End Bideo Container -->
+  </div>
+  <!-- </div>End Bideo Container -->
   
-  <!-- Main Container -->
-  <div class="main-container flex-shrink-0">
+  <!-- Main -->
 
     <!-- First Scene - Search Bar -->
     <div class="row" id="search-bar">
@@ -68,7 +66,7 @@
           <div class="form-group text-white">
             <input
               type="text"
-              class="form-control"
+              class="form-control d-flex mx-auto"
               id="search-term"
               placeholder="Search for an artist, team, city or venue"
               required
@@ -77,7 +75,7 @@
           
           <button
             type="submit"
-            class="btn btn-default text-white d-flex text-center"
+            class="btn btn-default text-white d-flex mx-auto"
             id="run-search" 
           >Search
           </button>
@@ -89,15 +87,15 @@
     <!-- Second Scene - Search Results -->
     <div class="row" id="event-table">
       <div class="col-md-12">
-        <div class="card customTable">
+        <div class="card customTable mt-3 mx-auto">
 
           <table class="table table-hover table-dark">
             <thead>
               <tr>
-                <th scope="col">Upcoming Shows</th>
-                <th scope="col">Date</th>
-                <th scope="col">City, State</th>
-                <th scope="col">Venue</th>
+                <th scope="col" width="250">Upcoming Shows</th>
+                <th scope="col" width="125">Date</th>
+                <th scope="col" width="150">City, State</th>
+                <th scope="col" width="150">Venue</th>
                 <th scope="col"></th>
               </tr>
             </thead>
@@ -159,15 +157,15 @@
 
     <div class="push"></div>
 
-    <div id="footer">
-      <footer class="footer mt-auto mx-auto py-3">
-        © Created by
-        <a href="https://github.com/jenross">Jen Ross</a>,
-        <a href="https://github.com/haz3141">Haz Dominguez</a>,
-        <a href="https://github.com/chaydashley1">Ashley Morales</a>,
-        <a href="https://github.com/DeanHaider">Dean Haider</a>, 2019
+      <footer class="footer py-3">
+        <div class="footer-container text-center">
+          <span class="footer-text d-inline-block">© Created by
+          <a href="https://github.com/jenross" target="_blank">Jen Ross</a>,
+          <a href="https://github.com/haz3141" target="_blank">Haz Dominguez</a>,
+          <a href="https://github.com/chaydashley1" target="_blank">Ashley Morales</a>,
+          <a href="https://github.com/DeanHaider" target="_blank">Dean Haider</a>, 2019</span>
+        </div>
       </footer>
-    </div>
     
   </div> <!-- End of Main Container -->
 

@@ -79,7 +79,7 @@ function makeMarker(venues) {
 function buildQueryURL() {
   let search = $('#search-term').val().trim(); 
   const APIKEY = 'MTUwOTcwMjd8MTU2MzQ2MzA4Ny42OQ';
-  let initialQueryURL = `https://api.seatgeek.com/2/events?q=${search}&client_id=${APIKEY}&per_page=5`;
+  let initialQueryURL = `https://api.seatgeek.com/2/events?q=${search}&client_id=${APIKEY}`;
 
   console.log(initialQueryURL);
   $('#search-term').val('');
@@ -107,6 +107,7 @@ $("#run-search").on("click", function(event) {
     }).then(function(response) {
       console.log(response);
       $('#event-table').show();
+      $('.footer').hide(); 
       // console.log('the response', response);
         let events = response.events.length; 
         let title;
@@ -115,9 +116,9 @@ $("#run-search").on("click", function(event) {
           title = $(`<td class='event-data'>${response.events[i].title}</td>`);
           let initialDate = response.events[i].datetime_local;
           let m = moment(initialDate, 'YYYY-MM-DDThh:mm:ss');
-          let convertedDate = $(`<td class='event-data'> ${m.format('ll')} </td>`);
+          let convertedDate = $(`<td class='event-data'>${m.format('ll')}</td>`);
           let location = $(`<td class='event-data local' id='${response.events[i].venue.postal_code}'>${response.events[i].venue.display_location}</td>`);
-          let venue = $(`<td class='event-data'> ${response.events[i].venue.name} </td>`);
+          let venue = $(`<td class='event-data'>${response.events[i].venue.name}</td>`);
           let lat = parseFloat(response.events[i].venue.location.lat);
           let lon = parseFloat(response.events[i].venue.location.lon);
           
@@ -133,7 +134,7 @@ $("#run-search").on("click", function(event) {
                               >More info</a></td>`);
 
           console.log(lat + ' ' + lon);
-          let results = $('<ul>').addClass('each-event d-flex flex-row justify-content-around'); 
+          let results = $('<td>').addClass('each-event'); 
           results.append(title, convertedDate, location, venue, moreInfo);
           $(tr).append(title);
           $(tr).append(convertedDate);
@@ -151,6 +152,7 @@ $(document).on('click', '.resultsBtn', function() {
   $('#results-box').show();
   $('#search-bar').hide();
   $('#event-table').hide();
+  $('.footer').show(); 
   gZip = $(this).attr('id_zip');
   gLat = parseFloat($(this).attr('id-lat'));
   gLon = parseFloat($(this).attr('id-lon'));
@@ -164,7 +166,7 @@ $(document).on('click', '.resultsBtn', function() {
 
 // Results Page Town Tab
 function aroundTown(lat, lon, zip, location, venueName) {
-  $('#result-title').text(`Places to Eat Around ${venueName}`);
+  $('#result-title').text(`Places to eat around ${venueName}`);
   $('#results').text(`Click on the markers to see restaurants in ${location}`);
   $('#goBtn').hide();
   $('#map').show();

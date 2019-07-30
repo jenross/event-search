@@ -13,18 +13,9 @@
   padding: inherit;
 }
 
-/* .table-hover {
-background-color: rgba(0, 0, 0, 0.63);
-}
-*/
 p.title {
   color: white;
   font-size: 20px;
-}
-
-.each-event {
-  list-style-type: none;
-  border-bottom: 1px solid black;
 }
 
 html,
@@ -32,9 +23,8 @@ body {
   width: 100%;
   height: 100%;
   background-color: black;
-  display: flex;
-  flex-direction: column;
 }
+
 #container {
   position: absolute;
   top: 0;
@@ -109,25 +99,17 @@ body {
 }
 
 .footer {
-  /* height: 50px; */
-  text-align: center;
   width: 100%;
-  /* margin: 0 auto; */
-  /* clear: both; */
   color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
-  /* margin: 10px; */
   font-size: 13px;
+  position: absolute;
+  bottom: 0; 
+  left: 0; 
+  right: 0; 
 }
 
-#footer {
-  position:fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-#footer a {
+.footer a {
   color: rgba(255, 255, 255, 0.5);
   font-size: 13px;
 }
@@ -140,24 +122,17 @@ body {
 
 .table-dark {
   color: #fff;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .logoStyle {
-  /* display: flex; */
   margin-left: 38%;
   padding-bottom: 31px;
 }
 
 .customTable {
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: inherit;
-  padding: 0;
-  margin: 20px;
-}
-
-#customSearchTop {
-  padding-top: 927px;
+  background-color: rgba(0, 0, 0, 0.5); 
+  font-size: 15px; 
 }
 
 .btn-primary {
@@ -177,16 +152,11 @@ body {
   color: rgb(0, 135, 252);
 }
 
-#run-search {
-  margin-left: 37%;
-}
-
 .logo-link {
   position: absolute;
-  left: 0;
-  top: 20px;
   display: none;
-  
+  margin-top: 15px;
+  margin-left: 20px; 
 }
 
 .logo-link:hover {
@@ -195,7 +165,7 @@ body {
 
 #event-table {
   max-width: 768px;
-  margin: 0 auto;
+  margin: 0 auto; 
 }
 
 .table-header {
