@@ -93,54 +93,57 @@ function clear() {
 
 // Start Page Search Button 
 $("#run-search").on("click", function(event) {
-  event.preventDefault();
-  $('#logo-link').show();
-  $('#search-bar').hide();
-  clear();
-  let queryURL = buildQueryURL();
-  $.ajax({
-    url: queryURL,
-    method: "GET"
-  }).then(function(response) {
-    console.log(response);
-    $('#event-table').show();
-    // console.log('the response', response);
-      let events = response.events.length; 
-      let title;
-      for (let i = 0; i < events; i++) {
-        var tr = $('<tr>');
-        title = $(`<td class='event-data'>${response.events[i].title}</td>`);
-        let initialDate = response.events[i].datetime_local;
-        let m = moment(initialDate, 'YYYY-MM-DDThh:mm:ss');
-        let convertedDate = $(`<td class='event-data'> ${m.format('ll')} </td>`);
-        let location = $(`<td class='event-data local' id='${response.events[i].venue.postal_code}'>${response.events[i].venue.display_location}</td>`);
-        let venue = $(`<td class='event-data'> ${response.events[i].venue.name} </td>`);
-        let lat = parseFloat(response.events[i].venue.location.lat);
-        let lon = parseFloat(response.events[i].venue.location.lon);
-        
-        let moreInfo = $(`<td><a class="btn btn-primary resultsBtn" 
-                            type="button" href='#' role="button" 
-                            id-venue='${response.events[i].venue.name}' 
-                            id_zip='${response.events[i].venue.postal_code}' 
-                            id_location='${response.events[i].venue.display_location}' 
-                            id-lat='${lat}' id-lon='${lon}'
-                            id-eventName='${response.events[i].title}'
-                            id-date='${m.format('ll')}'
-                            id-link='${response.events[i].url}'
-                            >More info</a></td>`);
+  if ($('#search-term').val().trim() == "") {
+    reset();
+  } else {
+    event.preventDefault();
+    $('#logo-link').show();
+    $('#search-bar').hide();
+    clear();
+    let queryURL = buildQueryURL();
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
+      console.log(response);
+      $('#event-table').show();
+      // console.log('the response', response);
+        let events = response.events.length; 
+        let title;
+        for (let i = 0; i < events; i++) {
+          var tr = $('<tr>');
+          title = $(`<td class='event-data'>${response.events[i].title}</td>`);
+          let initialDate = response.events[i].datetime_local;
+          let m = moment(initialDate, 'YYYY-MM-DDThh:mm:ss');
+          let convertedDate = $(`<td class='event-data'> ${m.format('ll')} </td>`);
+          let location = $(`<td class='event-data local' id='${response.events[i].venue.postal_code}'>${response.events[i].venue.display_location}</td>`);
+          let venue = $(`<td class='event-data'> ${response.events[i].venue.name} </td>`);
+          let lat = parseFloat(response.events[i].venue.location.lat);
+          let lon = parseFloat(response.events[i].venue.location.lon);
+          
+          let moreInfo = $(`<td><a class="btn btn-primary resultsBtn" 
+                              type="button" href='#' role="button" 
+                              id-venue='${response.events[i].venue.name}' 
+                              id_zip='${response.events[i].venue.postal_code}' 
+                              id_location='${response.events[i].venue.display_location}' 
+                              id-lat='${lat}' id-lon='${lon}'
+                              id-eventName='${response.events[i].title}'
+                              id-date='${m.format('ll')}'
+                              id-link='${response.events[i].url}'
+                              >More info</a></td>`);
 
-        console.log(lat + ' ' + lon);
-        let results = $('<ul>').addClass('each-event d-flex flex-row justify-content-around'); 
-        results.append(title, convertedDate, location, venue, moreInfo);
-        $(tr).append(title);
-        $(tr).append(convertedDate);
-        $(tr).append(location);
-        $(tr).append(venue);
-        $(tr).append(moreInfo);
-        $('#event-tbody').append(tr);
-        }
-  });
-  
+          console.log(lat + ' ' + lon);
+          let results = $('<ul>').addClass('each-event d-flex flex-row justify-content-around'); 
+          results.append(title, convertedDate, location, venue, moreInfo);
+          $(tr).append(title);
+          $(tr).append(convertedDate);
+          $(tr).append(location);
+          $(tr).append(venue);
+          $(tr).append(moreInfo);
+          $('#event-tbody').append(tr);
+          }
+    }); 
+  }
 });
 
 // Events Page More Info Button
@@ -301,9 +304,9 @@ function ticketsBtn() {
   $('#goBtn').attr('href', eventLink);
   $('#goBtn').attr('target', '_blank');
   $('#goBtn').show();
-  $('#result-title').text(`Buy Tickets to ${eventName}`);
+  $('#result-title').text(`${eventName}`);
   $('#results').attr('class', 'card-text2');
-  $('#results').text(`Being held at the ${venueName} on ${eventDate} in ${gLocation}.`);
+  $('#results').text(`At ${venueName} on ${eventDate} in ${gLocation}.`);
   // Change active tab
   $('#ticketsBtn').attr('class', 'nav-link active');
   $('#weatherBtn').attr('class', 'nav-link');
@@ -322,3 +325,14 @@ $(document).on('click', '#logo-link', function() {
   $('#results').empty();
   gotWeather = 0;
 });
+
+function reset() {
+  $('#search-bar').show();
+  $('#results-box').hide();
+  $('#event-table').hide();
+  $('#logo-link').hide();
+  $('#insert-table').empty();
+  $('#result-title').empty();
+  $('#results').empty();
+  gotWeather = 0;
+}
