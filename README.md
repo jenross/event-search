@@ -1,11 +1,19 @@
-<h1>S.I.T. (Show in Town)</h1>
+<h1>S.I.T. (Shows in Town)</h1>
 
-<p>The founders of the S.I.T. application designed it to be a one-stop shop to make your next experience at festival, concert, or club show an effortless one. </p>
-<p>S.I.T. has several different functionalities from being able to locate and purchase your tickets to shows either by artists, venue, or cities. </p>
-<p>Furthermore, S.I.T. has several built-in features that will help you get ready for the big show day from weather forecast to viewing different recreational activities (restaurants, etc.) within the vicinity of the venue. </p>
+<p>The founders of the S.I.T. application designed it to be a one-stop shop to make your next experience at a festival, concert, sporting event, or club show an effortless one.</p>
+<img src="assets/images/project-search.png" alt="initial search home screen">
+<p>Type in an artist, team, city, or venue and you will see the top 10 upcoming events that match your search.</p>
+<img src="assets/images/project-search-results.png" alt="search results">
+<p>Click the "More Info" button to see a map of the area around the venue with markers to help you find popular restaurants (rated by Foursquare users).</p>
+<img src="assets/images/project-map-results.png" alt="map results">
+<p>One tab over, the S.I.T. application provides the weather forecast (AccuWeather) for the week of the event.</p> 
+<img src="assets/images/project-weather-results.png" alt="weather results">
+<p>Now that you've found the right event and planned your day, go to the "Buy Tickets" tab and click on the "Go!" button to purchase tickets through SeatGeek.</p> 
+<img src="assets/images/project-buy-results.png" alt="buy tickets">
 
+<p>Check out the site <a href="https://jenross.github.io/event-search/" target="_blank">here</a>.
 
-**Prerequisites:**<
+**Prerequisites:**
 * Project Goal:
   * Build Something Awesome
 * Requirements:
@@ -20,7 +28,19 @@
    * Must be Deployed (GitHub Pages or Firebase)
    * Must have User Input Validation
 
-```
-APIs Used: SeatGeek, FourSquare, Google Maps, & AccuWeather
-Library Used: Bideo & Moment
-```
+**Coded with:**
+   *HTML
+   *CSS
+   *Javascript
+   *jQuery 
+
+**APIs Integrated:**
+   *SeatGeek 
+   *FourSquare
+   *Google Maps
+   *AccuWeather
+
+**Additional Libraries/Frameworks:**
+   *Bootstrap
+   *Moment.js
+   *Bideo.js
